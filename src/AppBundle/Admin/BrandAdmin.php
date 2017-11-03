@@ -6,30 +6,43 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class BrandAdmin extends AbstractAdmin
 {
-    protected $datagridValues = array(
-        '_sort_by' => 'brand_title',
-        '_sort_order' => 'ASC',
-    );
+    /**
+     * {@inheritdoc}
+     */
+    protected $datagridValues = [
+        '_sort_by' => 'title',
+        '_sort_order' => 'asc',
+    ];
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title', 'text', array('label' => 'Название'));
+            ->add('title', TextType::class, ['label' => 'Название']);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, array('label' => 'Название'));
+            ->add('title', null, ['label' => 'Название']);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id', null, array('label' => 'ID'))
-            ->addIdentifier('title', null, array('label' => 'Название'));
+            ->add('id', null, ['label' => 'ID'])
+            ->addIdentifier('title', null, ['label' => 'Название']);
     }
 }

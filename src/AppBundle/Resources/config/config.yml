@@ -1,0 +1,36 @@
+# Parameters
+parameters:
+    upload_params:
+        AppBundle\Entity\ProductPicture:
+            - {targetField: 'image', fileField: 'imageFile', directory: '%web_dir%/upload/product', alias: '/upload/product'}
+        AppBundle\Entity\ProductFile:
+            - {targetField: 'file',  fileField: 'fileFile',  directory: '%web_dir%/upload/product', alias: '/upload/product'}
+
+# Sonata Block Configuration
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+        sonata.admin.block.search_result:
+            contexts: [admin]
+
+# Sonata Admin Configuration
+sonata_admin:
+    title: 'Bodysolid Europe'
+    options:
+        confirm_exit: false
+
+    dashboard:
+        groups:
+            catalogue:
+                label: 'Каталог'
+                items:
+                    - sonata.admin.brand
+                    - sonata.admin.category
+                    - sonata.admin.product
+                    - sonata.admin.product_picture
+                    - sonata.admin.product_file
+                    - sonata.admin.product_video
+                    - sonata.admin.product_property

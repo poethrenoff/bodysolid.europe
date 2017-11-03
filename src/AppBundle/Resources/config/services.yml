@@ -1,0 +1,82 @@
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        # automatically injects dependencies in your services
+        autowire: true
+        # automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true
+        # this means you cannot fetch services directly from the container via $container->get()
+        # if you need to do this, you can override this setting on individual services
+        public: false
+
+    # makes classes in src/AppBundle available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    AppBundle\:
+        resource: '../../../../src/AppBundle/*'
+        # you can exclude directories or files
+        # but if a service is unused, it's removed anyway
+        exclude: '../../../../src/AppBundle/{Entity,Repository,Tests}'
+
+    # controllers are imported separately to make sure they're public
+    # and have a tag that allows actions to type-hint services
+    AppBundle\Controller\:
+        resource: '../../../../src/AppBundle/Controller'
+        public: true
+        tags: ['controller.service_arguments']
+
+    # Sonata admin
+    sonata.admin.brand:
+        class: AppBundle\Admin\BrandAdmin
+        arguments: [~, AppBundle\Entity\Brand, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Производители' }
+        public: true
+
+    sonata.admin.category:
+        class: AppBundle\Admin\CategoryAdmin
+        arguments: [~, AppBundle\Entity\Category, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Категории' }
+        calls:
+            - [ addChild, ['@sonata.admin.product'] ]
+        public: true
+
+    sonata.admin.product:
+        class: AppBundle\Admin\ProductAdmin
+        arguments: [~, AppBundle\Entity\Product, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Товары' }
+        calls:
+            - [ addChild, ['@sonata.admin.product_picture'] ]
+            - [ addChild, ['@sonata.admin.product_file'] ]
+            - [ addChild, ['@sonata.admin.product_video'] ]
+            - [ addChild, ['@sonata.admin.product_property'] ]
+        public: true
+
+    sonata.admin.product_picture:
+        class: AppBundle\Admin\ProductPictureAdmin
+        arguments: [~, AppBundle\Entity\ProductPicture, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Изображения' }
+        public: true
+
+    sonata.admin.product_file:
+        class: AppBundle\Admin\ProductFileAdmin
+        arguments: [~, AppBundle\Entity\ProductFile, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Файлы' }
+        public: true
+
+    sonata.admin.product_video:
+        class: AppBundle\Admin\ProductVideoAdmin
+        arguments: [~, AppBundle\Entity\ProductVideo, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Видео' }
+        public: true
+
+    sonata.admin.product_property:
+        class: AppBundle\Admin\ProductPropertyAdmin
+        arguments: [~, AppBundle\Entity\ProductProperty, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Свойства' }
+        public: true

@@ -3,17 +3,21 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Cocur\Slugify\Slugify;
 
 /**
-* @ORM\Entity
-* @ORM\Table(name="category")
-*/
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Table(name="category")
+ */
 class Category
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -22,7 +26,7 @@ class Category
     protected $id;
 
     /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(name="external_id", type="integer", nullable=true)
      */
@@ -31,7 +35,7 @@ class Category
     /**
      * @var Category
      *
-     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="categories")
      * @ORM\JoinColumn(name="category", referencedColumnName="id")
      */
     protected $category;
@@ -47,12 +51,13 @@ class Category
     /**
      * @var string
      *
+     * @Assert\Regex(pattern="/^[a-z0-9-]+$/i")
      * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
 
     /**
-     * @var integer
+     * @var int
      *
      * @Assert\NotBlank()
      * @ORM\Column(name="sort", type="integer")
@@ -65,6 +70,27 @@ class Category
      * @ORM\Column(name="active", type="boolean")
      */
     protected $active = true;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="category")
+     * @ORM\OrderBy({"sort" = "asc"})
+     */
+    protected $categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     * @ORM\OrderBy({"price" = "asc"})
+     */
+    protected $products;
+
+    /**
+     * Category constructor
+     */
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -85,18 +111,18 @@ class Category
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getExternalId(): ?string
+    public function getExternalId(): ?int
     {
         return $this->externalId;
     }
 
     /**
-     * @param string $externalId
+     * @param int $externalId
      * @return Category
      */
-    public function setExternalId(?string $externalId): Category
+    public function setExternalId(?int $externalId): Category
     {
         $this->externalId = $externalId;
         return $this;
@@ -193,17 +219,44 @@ class Category
     }
 
     /**
-     * @param mixed $categories
-     * @return Category
+     * @return ArrayCollection
      */
-    public function setCategories($categories)
+    public function getCategories()
     {
-        $this->categories = $categories;
-        return $this;
+        return $this->categories->filter(function($category) {
+            return $category->isActive();
+        });
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getProducts()
+    {
+        return $this->products->filter(function($product) {
+            return $product->isActive();
+        });
+    }
+
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
         return (string) $this->getTitle();
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     *
+     * @param LifecycleEventArgs $args
+     * @return void
+     */
+    public function slugify(LifecycleEventArgs $args): void
+    {
+        if (empty($this->getName())) {
+            $this->setName((new Slugify())->slugify($this->getTitle()));
+        }
     }
 }

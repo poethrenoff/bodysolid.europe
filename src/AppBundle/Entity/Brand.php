@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Brand
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
