@@ -4,22 +4,23 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Cocur\Slugify\Slugify;
 
 /**
+ * Category
+ *
  * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="category")
+ * @ORM\HasLifecycleCallbacks
  */
 class Category
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -28,7 +29,7 @@ class Category
     /**
      * @var int
      *
-     * @ORM\Column(name="external_id", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $externalId;
 
@@ -36,7 +37,7 @@ class Category
      * @var Category
      *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="categories")
-     * @ORM\JoinColumn(name="category", referencedColumnName="id")
+     * @ORM\JoinColumn(referencedColumnName="id")
      */
     protected $category;
 
@@ -44,7 +45,7 @@ class Category
      * @var string
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(type="string")
      */
     protected $title;
 
@@ -52,7 +53,7 @@ class Category
      * @var string
      *
      * @Assert\Regex(pattern="/^[a-z0-9-]+$/i")
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(type="string")
      */
     protected $name;
 
@@ -60,14 +61,14 @@ class Category
      * @var int
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="sort", type="integer")
+     * @ORM\Column(type="integer")
      */
     protected $sort;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="active", type="boolean")
+     * @ORM\Column(type="boolean")
      */
     protected $active = true;
 
@@ -223,7 +224,7 @@ class Category
      */
     public function getCategories()
     {
-        return $this->categories->filter(function($category) {
+        return $this->categories->filter(function ($category) {
             return $category->isActive();
         });
     }
@@ -233,7 +234,7 @@ class Category
      */
     public function getProducts()
     {
-        return $this->products->filter(function($product) {
+        return $this->products->filter(function ($product) {
             return $product->isActive();
         });
     }
@@ -243,7 +244,7 @@ class Category
      */
     public function __toString(): string
     {
-        return (string) $this->getTitle();
+        return (string)$this->getTitle();
     }
 
     /**

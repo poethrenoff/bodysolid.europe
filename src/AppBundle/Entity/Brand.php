@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Brand
+ *
  * @ORM\Entity
  * @ORM\Table(name="brand")
  */
@@ -14,7 +16,7 @@ class Brand
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -24,7 +26,7 @@ class Brand
      * @var string
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(type="string")
      */
     protected $title;
 

@@ -81,3 +81,42 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: 'Свойства' }
         public: true
+
+    sonata.admin.preference:
+        class: AppBundle\Admin\PreferenceAdmin
+        arguments: [~, AppBundle\Entity\Preference, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Настройки' }
+        public: true
+
+    sonata.admin.purchase:
+        class: AppBundle\Admin\PurchaseAdmin
+        arguments: [~, AppBundle\Entity\Purchase, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Заказы' }
+        calls:
+            - [ addChild, ['@sonata.admin.purchase_item'] ]
+        public: true
+
+    sonata.admin.purchase_item:
+        class: AppBundle\Admin\PurchaseItemAdmin
+        arguments: [~, AppBundle\Entity\PurchaseItem, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Позиции' }
+        public: true
+
+    sonata.admin.text:
+        class: AppBundle\Admin\TextAdmin
+        arguments: [~, AppBundle\Entity\Text, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Тексты' }
+        calls:
+            - [ setTemplate, [edit, AdminUploadBundle::edit.html.twig]]
+        public: true
+
+    sonata.admin.teaser:
+        class: AppBundle\Admin\TeaserAdmin
+        arguments: [~, AppBundle\Entity\Teaser, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: 'Тизеры' }
+        public: true

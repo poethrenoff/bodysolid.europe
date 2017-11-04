@@ -8,12 +8,12 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
- * ProductPicture
+ * Teaser
  *
  * @ORM\Entity
- * @ORM\Table(name="product_picture")
+ * @ORM\Table(name="teaser")
  */
-class ProductPicture
+class Teaser
 {
     /**
      * @var int
@@ -25,13 +25,12 @@ class ProductPicture
     protected $id;
 
     /**
-     * @var Product
+     * @var string
      *
      * @Assert\NotBlank()
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="pictures")
-     * @ORM\JoinColumn(referencedColumnName="id")
+     * @ORM\Column(type="string")
      */
-    protected $product;
+    protected $title;
 
     /**
      * @var string
@@ -46,12 +45,27 @@ class ProductPicture
     protected $imageFile;
 
     /**
+     * @var string
+     *
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string")
+     */
+    protected $url;
+
+    /**
      * @var int
      *
      * @Assert\NotBlank()
      * @ORM\Column(type="integer")
      */
     protected $sort;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $active = true;
 
     /**
      * @return int
@@ -63,29 +77,29 @@ class ProductPicture
 
     /**
      * @param int $id
-     * @return ProductPicture
+     * @return Teaser
      */
-    public function setId(?int $id): ProductPicture
+    public function setId(?int $id): Teaser
     {
         $this->id = $id;
         return $this;
     }
 
     /**
-     * @return Product
+     * @return string
      */
-    public function getProduct(): ?Product
+    public function getTitle(): ?string
     {
-        return $this->product;
+        return $this->title;
     }
 
     /**
-     * @param Product $product
-     * @return ProductPicture
+     * @param string $title
+     * @return Teaser
      */
-    public function setProduct(?Product $product): ProductPicture
+    public function setTitle(?string $title): Teaser
     {
-        $this->product = $product;
+        $this->title = $title;
         return $this;
     }
 
@@ -99,9 +113,9 @@ class ProductPicture
 
     /**
      * @param string $image
-     * @return ProductPicture
+     * @return Teaser
      */
-    public function setImage(?string $image): ProductPicture
+    public function setImage(?string $image): Teaser
     {
         $this->image = $image;
         return $this;
@@ -117,11 +131,29 @@ class ProductPicture
 
     /**
      * @param File $imageFile
-     * @return ProductPicture
+     * @return Teaser
      */
-    public function setImageFile(?File $imageFile): ProductPicture
+    public function setImageFile(?File $imageFile): Teaser
     {
         $this->imageFile = $imageFile;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     * @return Teaser
+     */
+    public function setUrl(?string $url): Teaser
+    {
+        $this->url = $url;
         return $this;
     }
 
@@ -135,11 +167,29 @@ class ProductPicture
 
     /**
      * @param int $sort
-     * @return ProductPicture
+     * @return Teaser
      */
-    public function setSort(?int $sort): ProductPicture
+    public function setSort(?int $sort): Teaser
     {
         $this->sort = $sort;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     * @return Teaser
+     */
+    public function setActive(?bool $active): Teaser
+    {
+        $this->active = $active;
         return $this;
     }
 
@@ -148,21 +198,6 @@ class ProductPicture
      */
     public function __toString(): string
     {
-        return (string)$this->getImage();
-    }
-
-    /**
-     * @Assert\Callback
-     */
-    public function validate(ExecutionContext $context)
-    {
-        if (empty($this->getImage()) && empty($this->getImageFile())) {
-            $context->buildViolation('Одно из полей обязательно к заполнению')
-                ->atPath('image')
-                ->addViolation();
-            $context->buildViolation('Одно из полей обязательно к заполнению')
-                ->atPath('imageFile')
-                ->addViolation();
-        }
+        return (string) $this->getTitle();
     }
 }

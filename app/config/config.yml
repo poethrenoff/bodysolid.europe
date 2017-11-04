@@ -87,6 +87,18 @@ sonata_admin:
         confirm_exit: false
 
     dashboard:
+        blocks:
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: [catalogue, purchase]
+            -
+                position: right
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: [content, system]
+
         groups:
             catalogue:
                 label: 'Каталог'
@@ -98,6 +110,19 @@ sonata_admin:
                     - sonata.admin.product_file
                     - sonata.admin.product_video
                     - sonata.admin.product_property
+            purchase:
+                label: 'Заказы'
+                items:
+                    - sonata.admin.purchase
+                    - sonata.admin.purchase_item
+            admin.group.content:
+                label: 'Контент'
+                items:
+                    - sonata.admin.text
+            admin.group.system:
+                label: 'Система'
+                items:
+                    - sonata.admin.preference
 
 # AdminUpload Configuration
 admin_upload:

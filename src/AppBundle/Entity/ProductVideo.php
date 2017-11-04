@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -26,7 +27,7 @@ class ProductVideo
      *
      * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="videos")
-     * @ORM\JoinColumn(name="product", referencedColumnName="id")
+     * @ORM\JoinColumn(referencedColumnName="id")
      */
     protected $product;
 
@@ -34,7 +35,7 @@ class ProductVideo
      * @var string
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="video", type="text")
+     * @ORM\Column(type="text")
      */
     protected $video;
 
@@ -42,7 +43,7 @@ class ProductVideo
      * @var int
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="sort", type="integer")
+     * @ORM\Column(type="integer")
      */
     protected $sort;
 
@@ -123,6 +124,6 @@ class ProductVideo
      */
     public function __toString(): string
     {
-        return (string) $this->getVideo();
+        return (string)$this->getVideo();
     }
 }

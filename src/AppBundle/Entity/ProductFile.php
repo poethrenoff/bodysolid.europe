@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -28,14 +29,14 @@ class ProductFile
      *
      * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="pictures")
-     * @ORM\JoinColumn(name="product", referencedColumnName="id")
+     * @ORM\JoinColumn(referencedColumnName="id")
      */
     protected $product;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="file", type="string", length=255)
+     * @ORM\Column(type="string")
      */
     protected $file;
 
@@ -48,7 +49,7 @@ class ProductFile
      * @var int
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="sort", type="integer")
+     * @ORM\Column(type="integer")
      */
     protected $sort;
 
@@ -147,7 +148,7 @@ class ProductFile
      */
     public function __toString(): string
     {
-        return (string) $this->getFile();
+        return (string)$this->getFile();
     }
 
     /**

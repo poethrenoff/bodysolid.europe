@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -27,7 +28,7 @@ class Product
     /**
      * @var int
      *
-     * @ORM\Column(name="external_id", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $externalId;
 
@@ -35,7 +36,7 @@ class Product
      * @var Category
      *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
-     * @ORM\JoinColumn(name="category", referencedColumnName="id")
+     * @ORM\JoinColumn(referencedColumnName="id")
      */
     protected $category;
 
@@ -44,7 +45,7 @@ class Product
      *
      * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Brand")
-     * @ORM\JoinColumn(name="brand", referencedColumnName="id")
+     * @ORM\JoinColumn(referencedColumnName="id")
      */
     protected $brand;
 
@@ -52,7 +53,7 @@ class Product
      * @var string
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(type="string")
      */
     protected $title;
 
@@ -60,28 +61,30 @@ class Product
      * @var float
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="price", type="decimal", scale=2)
+     * @ORM\Column(type="decimal", scale=2)
      */
     protected $price;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Choice({"new", "confirm", "deliver", "complete", "cancel"})
+     * @ORM\Column(type="string")
      */
-    protected $status;
+    protected $status = 'new';
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="active", type="boolean")
+     * @ORM\Column(type="boolean")
      */
     protected $active = true;
 
@@ -110,7 +113,7 @@ class Product
     protected $properties;
 
     /**
-     * Category constructor
+     * Product constructor
      */
     public function __construct()
     {
@@ -287,6 +290,6 @@ class Product
      */
     public function __toString(): string
     {
-        return (string) $this->getTitle();
+        return (string)$this->getTitle();
     }
 }

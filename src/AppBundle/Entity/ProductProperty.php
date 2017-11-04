@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -26,7 +27,7 @@ class ProductProperty
      *
      * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="properties")
-     * @ORM\JoinColumn(name="product", referencedColumnName="id")
+     * @ORM\JoinColumn(referencedColumnName="id")
      */
     protected $product;
 
@@ -34,7 +35,7 @@ class ProductProperty
      * @var string
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(type="string")
      */
     protected $name;
 
@@ -42,7 +43,7 @@ class ProductProperty
      * @var string
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(type="string")
      */
     protected $title;
 
@@ -50,7 +51,7 @@ class ProductProperty
      * @var string
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="value", type="string", length=255)
+     * @ORM\Column(type="string")
      */
     protected $value;
 
@@ -58,7 +59,7 @@ class ProductProperty
      * @var int
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="sort", type="integer")
+     * @ORM\Column(type="integer")
      */
     protected $sort;
 
@@ -175,6 +176,6 @@ class ProductProperty
      */
     public function __toString(): string
     {
-        return (string) $this->getTitle();
+        return (string)$this->getTitle();
     }
 }

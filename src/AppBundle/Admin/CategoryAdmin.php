@@ -30,14 +30,8 @@ class CategoryAdmin extends AbstractAdmin
         $formMapper
             ->add('externalId', IntegerType::class, ['label' => 'Neotren ID', 'required' => false])
             ->add('category', EntityType::class, ['class' => Category::class, 'label' => 'Родительская категория', 'required' => false,])
-            ->add('title', TextType::class, array('label' => 'Название'));
-
-        if (($category = $this->getSubject()) && !empty($category->getName())) {
-            $formMapper
-                ->add('name', TextType::class, ['label' => 'Ссылка']);
-        }
-
-        $formMapper
+            ->add('name', TextType::class, ['label' => 'Ссылка', 'required' => false])
+            ->add('title', TextType::class, ['label' => 'Название'])
             ->add('sort', IntegerType::class, ['label' => 'Порядок'])
             ->add('active', CheckboxType::class, ['label' => 'Видимость', 'required' => false]);
     }
@@ -61,8 +55,8 @@ class CategoryAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('category', null, ['label' => 'Родительская категория'])
-            ->addIdentifier('title', null, ['label' => 'Название'])
             ->add('name', null, ['label' => 'Ссылка'])
+            ->addIdentifier('title', null, ['label' => 'Название'])
             ->add('sort', null, ['label' => 'Порядок', 'editable' => true])
             ->add('active', null, ['label' => 'Видимость', 'editable' => true])
             ->add('_action', 'actions', [
