@@ -51,6 +51,7 @@ services:
             - [ addChild, ['@sonata.admin.product_file'] ]
             - [ addChild, ['@sonata.admin.product_video'] ]
             - [ addChild, ['@sonata.admin.product_property'] ]
+            - [ setTemplate, [edit, AdminUploadBundle::edit.html.twig]]
         public: true
 
     sonata.admin.product_picture:

@@ -2,8 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@AppBundle/Resources/config/config.yml" }
-    - { resource: "@AppBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -71,3 +69,46 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+# Sonata Block Configuration
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+        sonata.admin.block.search_result:
+            contexts: [admin]
+
+# Sonata Admin Configuration
+sonata_admin:
+    title: 'Bodysolid Europe'
+    options:
+        confirm_exit: false
+
+    dashboard:
+        groups:
+            catalogue:
+                label: 'Каталог'
+                items:
+                    - sonata.admin.brand
+                    - sonata.admin.category
+                    - sonata.admin.product
+                    - sonata.admin.product_picture
+                    - sonata.admin.product_file
+                    - sonata.admin.product_video
+                    - sonata.admin.product_property
+
+# AdminUpload Configuration
+admin_upload:
+    directory: '%web_dir%/upload'
+    alias:     '/upload'
+    entities:
+        AppBundle\Entity\ProductPicture:
+            image:
+                directory: '%web_dir%/upload/product'
+                alias: '/upload/product'
+        AppBundle\Entity\ProductFile:
+            file:
+                directory: '%web_dir%/upload/product'
+                alias: '/upload/product'
