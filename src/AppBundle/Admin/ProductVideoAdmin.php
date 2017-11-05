@@ -44,6 +44,8 @@ class ProductVideoAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('product', null, ['label' => 'Товар'])
-            ->addIdentifier('video', null, ['label' => 'Видео']);
+            ->addIdentifier('video', null, ['label' => 'Видео'])
+            ->add('sort', null, ['label' => 'Порядок', 'editable' => true])
+        ;
     }
 }

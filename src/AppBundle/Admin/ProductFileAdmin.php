@@ -46,6 +46,8 @@ class ProductFileAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('product', null, ['label' => 'Товар'])
-            ->addIdentifier('file', null, ['label' => 'Файл']);
+            ->addIdentifier('file', null, ['label' => 'Файл'])
+            ->add('sort', null, ['label' => 'Порядок', 'editable' => true])
+        ;
     }
 }

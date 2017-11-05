@@ -48,6 +48,8 @@ class ProductPropertyAdmin extends AbstractAdmin
             ->add('product', null, ['label' => 'Товар'])
             ->add('name', null, ['label' => 'Имя'])
             ->addIdentifier('title', null, ['label' => 'Название'])
-            ->add('value', null, ['label' => 'Значение']);
+            ->add('value', null, ['label' => 'Значение'])
+            ->add('sort', null, ['label' => 'Порядок', 'editable' => true])
+        ;
     }
 }

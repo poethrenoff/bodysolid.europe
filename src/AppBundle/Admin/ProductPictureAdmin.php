@@ -4,6 +4,7 @@ namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -51,6 +52,8 @@ class ProductPictureAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('product', null, ['label' => 'Товар'])
-            ->addIdentifier('image', null, ['label' => 'Изображение']);
+            ->addIdentifier('image', null, ['label' => 'Изображение'])
+            ->add('sort', null, ['label' => 'Порядок', 'editable' => true])
+        ;
     }
 }

@@ -76,10 +76,17 @@ class Product
      * @var string
      *
      * @Assert\NotBlank()
-     * @Assert\Choice({"new", "confirm", "deliver", "complete", "cancel"})
+     * @Assert\Choice({"available", "delivery", "order"})
      * @ORM\Column(type="string")
      */
-    protected $status = 'new';
+    protected $status;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $best = false;
 
     /**
      * @var boolean
@@ -264,6 +271,24 @@ class Product
     public function setStatus(?string $status): Product
     {
         $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBest(): bool
+    {
+        return $this->best;
+    }
+
+    /**
+     * @param bool $best
+     * @return Product
+     */
+    public function setBest(bool $best): Product
+    {
+        $this->best = $best;
         return $this;
     }
 
