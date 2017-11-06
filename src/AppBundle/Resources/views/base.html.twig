@@ -22,18 +22,18 @@
         <script type="text/javascript" src="{{ asset('js/interface.js') }}"></script>
 {% endblock %}
     </head>
-    <body id="index">
+    <body id="{% block style %}default{% endblock %}">
         <div class="wrapper">
             <div class="header">
                 <div class="left">
                     <div class="logo">
-                        <a href="/">
+                        <a href="{{ path('index') }}">
                             <img src="{{ asset('image/bodysolid_logo.png') }}" />
                         </a>
                     </div>
                     <div class="contact">
                         <div class="phone">
-                            <p>(495) 518-52-97, (495) 744-61-65</p>
+                            <p>(495) 518-52-97, (495) 518-14-19</p>
                         </div>
                         <div class="callback">
                             <a href="/callback" title="Обратный звонок" onclick="return callback()">
@@ -47,231 +47,22 @@
                         </div>
                     </div>
                     <div class="menu">
-                        <ul>
-                            <li>
-                                <a href="/product/stoyki_pod_shtangu_i_mashiny_smita">
-                                    Силовые тренажеры
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="/product/stoyki_pod_shtangu_i_mashiny_smita">
-                                            Стойки под штангу и машины Смита
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/multistancii">
-                                            Мультистанции
-                                        </a>
-                                    </li>
-                                    <li class="submenu">
-                                        <a href="/product/multistancii">
-                                            Мультистанции
-                                        </a>
-                                    </li>
-                                    <li class="submenu">
-                                        <a href="/product/opcii_k_multistanciyam">
-                                            Опции к мультистанциям
-                                        </a>
-                                    </li>
-                                    <li class="submenu">
-                                        <a href="/product/krossovery">
-                                            Кроссоверы
-                                        </a>
-                                    </li>
-                                    <li class="submenu">
-                                        <a href="/product/opcii_k_krossoveram">
-                                            Опции к кроссоверам
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/opcii_k_multistanciyam">
-                                            Опции к мультистанциям
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/krossovery">
-                                            Кроссоверы
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/opcii_k_krossoveram">
-                                            Опции к кроссоверам
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/product/stoyki_pod_shtangu_i_mashiny_smita">
-                                    Кардиотренажеры
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="/product/pro_club_line">
-                                            Pro Club Line
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/pro_dual_line">
-                                            Pro Dual Line
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/pro_club_leverage">
-                                            Pro Club Leverage
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/skami_pro_club">
-                                            Скамьи Pro Club
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/product/stoyki_pod_shtangu_i_mashiny_smita">
-                                    Массажное оборудование
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="/product/dlya_pressa_i_spiny">
-                                            Для пресса и спины
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/dlya_grudi_i_ruk">
-                                            Для груди и рук
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/dlya_myshc_nog">
-                                            Для мышц ног
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/skami">
-                                            Скамьи
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/opcii_k_svobodnym_vesam">
-                                            Опции к свободным весам
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/prisposobleniya_dlya_hraneniya">
-                                            Приспособления для хранения
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/dlya_pressa_i_spiny">
-                                            Для пресса и спины
-                                        </a>
-                                    </li>
-                                    <li class="submenu">
-                                        <a href="/product/dlya_grudi_i_ruk">
-                                            Для груди и рук
-                                        </a>
-                                    </li>
-                                    <li class="submenu">
-                                        <a href="/product/dlya_myshc_nog">
-                                            Для мышц ног
-                                        </a>
-                                    </li>
-                                    <li class="submenu">
-                                        <a href="/product/skami">
-                                            Скамьи
-                                        </a>
-                                    </li>
-                                    <li class="submenu">
-                                        <a href="/product/opcii_k_svobodnym_vesam">
-                                            Опции к свободным весам
-                                        </a>
-                                    </li>
-                                    <li class="submenu">
-                                        <a href="/product/prisposobleniya_dlya_hraneniya">
-                                            Приспособления для хранения
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/product/stoyki_pod_shtangu_i_mashiny_smita">
-                                    Аксессуары
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="/product/rukoyatki_dlya_tyagi">
-                                            Рукоятки для тяги
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/ganteli_i_shtangi">
-                                            Гантели и штанги
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/grify_dlya_shtang_i_ganteley">
-                                            Грифы для штанг и гантелей
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/diski_vesovye">
-                                            Диски весовые
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/stoyki_dlya_hraneniya">
-                                            Стойки для хранения
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/fitnes_aksessuary">
-                                            Фитнес-аксессуары
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+{{ render(controller('AppBundle:Product:menu')) }}
                     </div>
                 </div>
                 <div class="right">
                     <div class="menu">
-                        <a href="/about">О компании</a>
-                        <a href="/delivery">Доставка и оплата</a>
-                        <a href="/contact">Контакты</a>
+                        <a href="{{ path('about') }}">О компании</a>
+                        <a href="{{ path('delivery') }}">Доставка и оплата</a>
+                        <a href="{{ path('contact') }}">Контакты</a>
                     </div>
                 </div>
             </div>
             <div class="content">
-                <?php if (isset($this->content)) { ?>
-                <?= $this->content ?>
-                <?php } ?>
-                <?php if (isset($this->left)) { ?>
-                <div class="left">
-                    <?= $this->left ?>
-                </div>
-                <?php } ?>
-                <?php if (isset($this->right)) { ?>
-                <div class="right">
-                    <?= $this->right ?>
-                </div>
-                <?php } ?>
-                <?php if (isset($this->bottom)) { ?>
-                <div class="bottom">
-                    <?= $this->bottom ?>
-                </div>
-                <?php } ?>
+{% block content %}{% endblock %}
             </div>
             <div class="cart">
                 <?= $this->cart ?>
-            </div>
-            <div class="compare">
-                <?= $this->compare ?>
-            </div>
-            <div class="body-focus">
-                <div class="title">
-                    <a href="/body_focus">Целевые<br/>мышцы</a>
-                </div>
             </div>
             <div class="price-list">
                 <div class="title">
@@ -283,7 +74,14 @@
             </div>
             <div class="footer">
                 <div class="search">
-                    <?= $this->search ?>
+                    <form method="get" action="{{ path('search') }}">
+                        <div class="text">
+                            <input type="text" name="text" placeholder="Поиск..." />
+                        </div>
+                        <div class="submit">
+                            <input type="submit" value="" />
+                        </div>
+                    </form>
                 </div>
                 <div class="copyright">
                     <p>&copy; ООО "Фитнесспорт", {{ "now"|date("Y") }} г.</p>

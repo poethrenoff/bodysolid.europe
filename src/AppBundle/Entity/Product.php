@@ -5,17 +5,20 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
  * Product
  *
- * @ORM\Entity
  * @ORM\Table(name="product")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
  */
 class Product
 {
+    /**
+     * @var string
+     */
+    const DEFAULT_PICTURE = '/image/default.jpg';
+
     /**
      * @var int
      *
@@ -308,6 +311,21 @@ class Product
     {
         $this->active = $active;
         return $this;
+    }
+
+    /**
+     * @return ProductPicture
+     */
+    public function getImage()
+    {
+        if (count($this->pictures)) {
+            return $this->pictures->first();
+        }
+
+        $picture = new ProductPicture();
+        $picture->setImage(self::DEFAULT_PICTURE);
+
+        return $picture;
     }
 
     /**

@@ -1,0 +1,15 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block style %}index{% endblock %}
+
+{% block content %}
+                <div class="left">
+{{ render(controller('AppBundle:Teaser:block')) }}
+                </div>
+                <div class="right">
+{{ render(controller('AppBundle:Text:block', {'name': 'index'})) }}
+                </div>
+                <div class="bottom">
+                    <!-- -->
+                </div>
+{% endblock %}

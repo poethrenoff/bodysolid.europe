@@ -1,0 +1,29 @@
+                        <ul>
+{% for categoryItem in categoryList %}
+                            <li>
+                                <a href="{{ path('categoryItem', {categoryName: categoryItem.name}) }}">
+                                    {{ categoryItem.title }}
+                                </a>
+{% if categoryItem.categories %}
+                                <ul>
+{% for subCategoryItem in categoryItem.categories %}
+                                    <li>
+                                        <a href="{{ path('categoryItem', {categoryName: subCategoryItem.name}) }}">
+                                            {{ subCategoryItem.title }}
+                                        </a>
+                                    </li>
+{% if subCategoryItem.categories %}
+{% for subSubCategoryItem in subCategoryItem.categories %}
+                                    <li class="submenu">
+                                        <a href="{{ path('categoryItem', {categoryName: subSubCategoryItem.name}) }}">
+                                            {{ subSubCategoryItem.title }}
+                                        </a>
+                                    </li>
+{% endfor %}
+{% endif %}
+{% endfor %}
+                                </ul>
+{% endif %}
+                            </li>
+{% endfor %}
+                        </ul>

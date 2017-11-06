@@ -1,0 +1,7 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block title %}{{ textItem.title }}{% endblock %}
+
+{% block content %}
+    {{ textItem.text | raw }}
+{% endblock %}

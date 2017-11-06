@@ -92,12 +92,12 @@ sonata_admin:
                 position: left
                 type: sonata.admin.block.admin_list
                 settings:
-                    groups: [catalogue, purchase]
+                    groups: [catalogue]
             -
                 position: right
                 type: sonata.admin.block.admin_list
                 settings:
-                    groups: [content, system]
+                    groups: [purchase, content, system]
 
         groups:
             catalogue:
@@ -115,14 +115,21 @@ sonata_admin:
                 items:
                     - sonata.admin.purchase
                     - sonata.admin.purchase_item
-            admin.group.content:
+            content:
                 label: 'Контент'
                 items:
                     - sonata.admin.text
-            admin.group.system:
+                    - sonata.admin.teaser
+            system:
                 label: 'Система'
                 items:
                     - sonata.admin.preference
+
+# Gregwar Image Configuration
+gregwar_image:
+    web_dir: "%web_dir%"
+    cache_dir:  "upload/cache"
+    throw_exception: false
 
 # AdminUpload Configuration
 admin_upload:
@@ -137,3 +144,7 @@ admin_upload:
             file:
                 directory: '%web_dir%/upload/product'
                 alias: '/upload/product'
+        AppBundle\Entity\Teaser:
+            image:
+                directory: '%web_dir%/upload/teaser'
+                alias: '/upload/teaser'

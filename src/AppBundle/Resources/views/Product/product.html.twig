@@ -1,0 +1,24 @@
+                    <div class="product">
+                        <div class="product-hover">
+                            <div class="product-description">
+                                <a href="{{ path('productItem', {categoryName: productItem.category.name, id: productItem.id}) }}">
+                                    <h3>{{ productItem.title }}</h3>
+                                </a>
+                            </div>
+                            <div class="product-image">
+                                <a href="{{ path('productItem', {categoryName: productItem.category.name, id: productItem.id}) }}">
+                                    <img src="{{ web_image(productItem.image).cropResize(180, 180) }}" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-title">
+                            <div class="product-price">
+                                {{ productItem.price }} р.
+                            </div>
+                            <div class="product-cart">
+                                <a href="/cart" onclick="return buyItem({{ productItem.id }}, this)">
+                                    <img src="/image/cart.png" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>

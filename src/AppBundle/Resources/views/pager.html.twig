@@ -1,0 +1,21 @@
+{% if pager|length %}
+    <div class="pager">
+        {% if pager.prevPage is defined %}
+            <a href="{{ url|replace({'__page__': pager.prevPage}) }}">&larr;</a>
+        {% endif %}
+        {% for page in pager.pageList %}
+            {% if page is empty %}
+                ...
+            {% else %}
+                {% if page == pager.currentPage %}
+                    <b>{{ page }}</b>
+                {% else %}
+                    <a href="{{ url|replace({'__page__': page}) }}">{{ page }}</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        {% if pager.nextPage is defined %}
+            <a href="{{ url|replace({'__page__': pager.nextPage}) }}">&rarr;</a>
+        {% endif %}
+    </div>
+{% endif %}
