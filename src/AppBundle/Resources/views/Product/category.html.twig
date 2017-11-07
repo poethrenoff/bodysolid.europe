@@ -12,11 +12,12 @@
 {% endfor %}
                     </div>
 {% endif %}
-{% if categoryItem.products|length %}
-{% for productItem in categoryItem.products %}
+{% if productList|length %}
+{% for productItem in productList %}
 {% include 'AppBundle:Product:product.html.twig' with {productItem: productItem} %}
 {% endfor %}
 {% endif %}
                     <div class="clear"></div>
                 </div>
+{{ include('AppBundle::pager.html.twig', {pager: pager}) }}
 {% endblock %}

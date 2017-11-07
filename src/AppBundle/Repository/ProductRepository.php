@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use AppBundle\Entity\Category;
 
 /**
  * ProductRepository
@@ -11,12 +12,33 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class ProductRepository extends EntityRepository
 {
     /**
-     * @param $text
-     * @param $offset
-     * @param $limit
+     * @param Category $category
+     * @param int $offset
+     * @param int $limit
      * @return Paginator
      */
-    public function findByText($text, $offset, $limit)
+    public function findByCategory(Category $category, int $offset, int $limit): Paginator
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.category = :category')
+            ->andWhere('p.active = :active')
+            ->orderBy('p.price', 'asc')
+            ->setParameter('category', $category->getId())
+            ->setParameter('active', true)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return new Paginator($qb, false);
+    }
+
+    /**
+     * @param string $text
+     * @param int $offset
+     * @param int $limit
+     * @return Paginator
+     */
+    public function findByText(string $text, int $offset, int $limit): Paginator
     {
         $qb = $this->createQueryBuilder('p')
             ->select('p')

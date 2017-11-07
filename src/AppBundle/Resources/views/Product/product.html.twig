@@ -13,7 +13,7 @@
                         </div>
                         <div class="product-title">
                             <div class="product-price">
-                                {{ productItem.price }} р.
+                                {{ productItem.price|number_format(0, '.', ' ') }} р.
                             </div>
                             <div class="product-cart">
                                 <a href="/cart" onclick="return buyItem({{ productItem.id }}, this)">

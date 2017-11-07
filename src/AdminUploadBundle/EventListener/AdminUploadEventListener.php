@@ -2,33 +2,33 @@
 
 namespace AdminUploadBundle\EventListener;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Sonata\AdminBundle\Event\PersistenceEvent;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
-use AdminUploadBundle\Util\Util;
+use AdminUploadBundle\Service\AdminUploadManager;
 
 class AdminUploadEventListener implements EventSubscriberInterface
 {
+    /**
+     * @var AdminUploadManager
+     */
+    protected $uploadManager;
+
     /**
      * @var PropertyAccessorInterface
      */
     protected $accessor;
 
     /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
      * UploadEventListener constructor
      *
-     * @param ContainerInterface $container
+     * @param AdminUploadManager $uploadManager
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(AdminUploadManager $uploadManager)
     {
-        $this->container = $container;
+        $this->uploadManager = $uploadManager;
+        $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
     /**
@@ -48,31 +48,14 @@ class AdminUploadEventListener implements EventSubscriberInterface
     public function upload(PersistenceEvent $event)
     {
         $object = $event->getObject();
-        $uploadParams = $this->container->getParameter('admin_upload')['entities'];
-        if (in_array(get_class($object), array_keys($uploadParams)) ) {
-            $fieldDescs = $uploadParams[get_class($object)];
-            foreach ($fieldDescs as $fieldName => $fieldDesc) {
-                $file = $this->getAccessor()->getValue($object, $fieldDesc['fileField']);
-                if ($file) {
-                    $fileName = Util::getFileName($file->getClientOriginalName());
-                    $file->move($fieldDesc['directory'], $fileName);
-                    $filePath = Util::getFilePath($fileName, $fieldDesc['alias']);
+        foreach ($this->uploadManager->getFields(get_class($object)) as $fieldName => $fieldDesc) {
+            $file = $this->accessor->getValue($object, $fieldDesc['fileField']);
+            if ($file) {
+                $filePath = $this->uploadManager->upload($file, $fieldDesc['directory'], $fieldDesc['alias']);
 
-                    $this->getAccessor()->setValue($object, $fieldName, $filePath);
-                    $this->getAccessor()->setValue($object, $fieldDesc['fileField'], null);
-                }
+                $this->accessor->setValue($object, $fieldName, $filePath);
+                $this->accessor->setValue($object, $fieldDesc['fileField'], null);
             }
         }
-    }
-
-    /**
-     * @return PropertyAccessorInterface
-     */
-    protected function getAccessor(): PropertyAccessorInterface
-    {
-        if ($this->accessor !== null) {
-            return $this->accessor;
-        }
-        return $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 }

@@ -129,6 +129,7 @@ sonata_admin:
 gregwar_image:
     web_dir: "%web_dir%"
     cache_dir:  "upload/cache"
+    fallback_image: "%web_dir%/image/default.jpg"
     throw_exception: false
 
 # AdminUpload Configuration

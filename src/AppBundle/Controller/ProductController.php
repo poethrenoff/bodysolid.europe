@@ -16,7 +16,7 @@ class ProductController extends Controller
     /**
      * @var int
      */
-    const LIMIT = 20;
+    const PRODUCTS_PER_PAGE = 20;
 
     /**
      * Category menu
@@ -30,7 +30,7 @@ class ProductController extends Controller
             ->getRepository(Category::class)->findBy(['active' => true, 'category' => null]);
 
         return $this->render('AppBundle::Product/menu.html.twig', array(
-            'categoryList' => $categoryList
+            'categoryList' => $categoryList,
         ));
     }
 
@@ -52,8 +52,15 @@ class ProductController extends Controller
             throw new NotFoundHttpException('Страница не найдена');
         }
 
+        $page = max(1, $request->query->getInt('page', 1));
+        $offset = ($page - 1) * self::PRODUCTS_PER_PAGE;
+        $productList = $this->getDoctrine()->getManager()
+            ->getRepository(Product::class)->findByCategory($categoryItem, $offset, self::PRODUCTS_PER_PAGE);
+
         return $this->render('AppBundle::Product/category.html.twig', array(
-            'categoryItem' => $categoryItem
+            'categoryItem' => $categoryItem,
+            'productList' => $productList,
+            'pager' => Pager::build(count($productList), self::PRODUCTS_PER_PAGE, $page),
         ));
     }
 
@@ -72,7 +79,7 @@ class ProductController extends Controller
         }
 
         return $this->render('AppBundle::Product/product.html.twig', array(
-            'productItem' => $productItem
+            'productItem' => $productItem,
         ));
     }
 
@@ -87,34 +94,56 @@ class ProductController extends Controller
     public function searchAction(Request $request)
     {
         $page = max(1, $request->query->getInt('page', 1));
-        $offset = ($page - 1) * self::LIMIT;
+        $offset = ($page - 1) * self::PRODUCTS_PER_PAGE;
 
         $productList = array();
         $text = $request->query->get('text');
         if ($text !== '') {
             $productList = $this->getDoctrine()->getManager()
-                ->getRepository(Product::class)->findByText($text, $offset, self::LIMIT);
+                ->getRepository(Product::class)->findByText($text, $offset, self::PRODUCTS_PER_PAGE);
         }
 
         return $this->render('AppBundle::Product/search.html.twig', array(
             'text' => $text,
             'productList' => $productList,
-            'pager' => Pager::create(count($productList), self::LIMIT, $page),
+            'pager' => Pager::build(count($productList), self::PRODUCTS_PER_PAGE, $page),
+        ));
+    }
+
+    /**
+     * Best products
+     *
+     * @param Request $request
+     * @param int $limit
+     * @return Response
+     */
+    public function bestAction(Request $request, int $limit = 4)
+    {
+        $productList = $this->getDoctrine()->getManager()
+                ->getRepository(Product::class)->findBy(['active' => true, 'best' => true]);
+
+        shuffle($productList);
+
+        return $this->render('AppBundle::Product/best.html.twig', array(
+            'productList' => array_slice($productList, 0, $limit),
         ));
     }
 
     /**
      * Pricelist
      *
-     * @Route("/price", name="price")
+     * @Route("/price_list", name="price_list")
+     *
+     * @param Request $request
+     * @return Response
      */
     public function priceAction(Request $request)
     {
-        $catalogueList = $this->getDoctrine()->getManager()
-            ->getRepository(Category::class)->findAllActive();
+        $categoryList = $this->getDoctrine()->getManager()
+            ->getRepository(Category::class)->findBy(['active' => true, 'category' => null]);
 
         return $this->render('AppBundle::Product/price.html.twig', array(
-            'catalogueList' => $catalogueList
+            'categoryList' => $categoryList
         ));
     }
 }

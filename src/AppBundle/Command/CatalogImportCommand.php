@@ -4,10 +4,9 @@ namespace AppBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Doctrine\Bundle\DoctrineBundle\Command\DoctrineCommand;
-
-use AdminUploadBundle\Util\Util;
-
+use AdminUploadBundle\Service\AdminUploadManager;
 use AppBundle\Entity\Brand;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Product;
@@ -26,11 +25,29 @@ class CatalogImportCommand extends DoctrineCommand
     const IMPORT_URL = 'https://neotren.ru/xml.php';
 
     /**
+     * @var AdminUploadManager
+     */
+    protected $uploadManager;
+
+    /**
+     * CatalogImportCommand constructor
+     *
+     * @param AdminUploadManager $uploadManager
+     */
+    public function __construct(AdminUploadManager $uploadManager)
+    {
+        parent::__construct();
+
+        $this->uploadManager = $uploadManager;
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function configure()
     {
-        $this->setName('app:catalog:import');
+        $this->setName('app:catalog:import')
+            ->addOption('clear', 'c', InputOption::VALUE_NONE);
     }
 
     /**
@@ -48,7 +65,9 @@ class CatalogImportCommand extends DoctrineCommand
             return;
         }
 
-        //$this->clearDb();
+        if ($input->getOption('clear')) {
+            $this->clearDb();
+        }
 
         $entityManager = $this->getEntityManager('default');
 
@@ -204,11 +223,10 @@ class CatalogImportCommand extends DoctrineCommand
      */
     protected function upload(string $url, string $class, string $field)
     {
-        $directory = $this->getContainer()->getParameter('admin_upload')['entities'][$class][$field]['directory'];
-        $alias = $this->getContainer()->getParameter('admin_upload')['entities'][$class][$field]['alias'];
+        $fieldDesc = $this->uploadManager->getFields($class)[$field];
 
         $name = pathinfo($url, PATHINFO_BASENAME);
-        $path = $directory . DIRECTORY_SEPARATOR . $name;
+        $path = $fieldDesc['directory'] . DIRECTORY_SEPARATOR . $name;
         if (!file_exists($path)) {
             $data = @file_get_contents($url);
             if ($data) {
@@ -216,7 +234,7 @@ class CatalogImportCommand extends DoctrineCommand
             }
         }
 
-        return Util::getFilePath($name, $alias);
+        return $this->uploadManager->getFilePath($name, $fieldDesc['alias']);
     }
 
     /**

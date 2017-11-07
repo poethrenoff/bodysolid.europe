@@ -1,9 +1,19 @@
 <?php
+
 namespace AppBundle\Util;
 
+/**
+ * Class Pager
+ */
 class Pager
 {
-    public static function create($total, $limit, $page)
+    /**
+     * @param int $total
+     * @param int $limit
+     * @param int $page
+     * @return array
+     */
+    public static function build(int $total, int $limit, int $page)
     {
         $firstPage = 1;
         $lastPage = max(ceil($total / $limit), 1);
@@ -13,7 +23,7 @@ class Pager
         $sectionFirstPage = max($firstPage, min($lastPage - $sectionLength + 1, $currentPage - floor($sectionLength / 2)));
         $sectionLastPage = min(max($sectionLength, $currentPage + floor(($sectionLength - 1) / 2)), $lastPage);
 
-        $pageList = array();
+        $pageList = [];
 
         if ($sectionFirstPage > $firstPage) {
             $pageList[] = $firstPage;

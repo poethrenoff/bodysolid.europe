@@ -12,7 +12,7 @@ services:
     # makes classes in src/UploadBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     AdminUploadBundle\:
-        resource: '../../../../src/AdminUploadBundle/{Controller,EventListener}'
+        resource: '../../../../src/AdminUploadBundle/{Controller,EventListener,Service}'
 
     # controllers are imported separately to make sure they're public
     # and have a tag that allows actions to type-hint services

@@ -8,19 +8,20 @@
     "packages": [
         {
             "name": "cocur/slugify",
-            "version": "v2.5",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cocur/slugify.git",
-                "reference": "e8167e9a3236044afebd6e8ab13ebeb3ec9ca145"
+                "reference": "1fdf2b1219a199301db3d7c60c16d895bba6ccde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cocur/slugify/zipball/e8167e9a3236044afebd6e8ab13ebeb3ec9ca145",
-                "reference": "e8167e9a3236044afebd6e8ab13ebeb3ec9ca145",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/1fdf2b1219a199301db3d7c60c16d895bba6ccde",
+                "reference": "1fdf2b1219a199301db3d7c60c16d895bba6ccde",
                 "shasum": ""
             },
             "require": {
+                "ext-mbstring": "*",
                 "php": ">=5.5.9"
             },
             "require-dev": {
@@ -68,7 +69,7 @@
                 "slug",
                 "slugify"
             ],
-            "time": "2017-03-23T21:52:55+00:00"
+            "time": "2017-09-24T10:29:04+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -2106,33 +2107,33 @@
         },
         {
             "name": "sonata-project/core-bundle",
-            "version": "3.5.1",
+            "version": "3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "a8cc1731d832e6bde3fdad2334cfd158d1d45fbb"
+                "reference": "d911899db2acd73910bef02ac977cad70a3eecb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/a8cc1731d832e6bde3fdad2334cfd158d1d45fbb",
-                "reference": "a8cc1731d832e6bde3fdad2334cfd158d1d45fbb",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/d911899db2acd73910bef02ac977cad70a3eecb9",
+                "reference": "d911899db2acd73910bef02ac977cad70a3eecb9",
                 "shasum": ""
             },
             "require": {
-                "cocur/slugify": "^1.4 || ^2.0",
-                "php": "^5.3 || ^7.0",
+                "cocur/slugify": "^1.4 || ^2.0 || ^3.0",
+                "php": "^5.6 || ^7.0",
                 "sonata-project/datagrid-bundle": "^2.0",
-                "symfony/config": "^2.3 || ^3.0",
-                "symfony/form": "^2.3.5 || ^3.0",
-                "symfony/framework-bundle": "^2.3 || ^3.0",
-                "symfony/http-foundation": "^2.3 || ^3.0",
-                "symfony/property-access": "^2.3 || ^3.0",
-                "symfony/security": "^2.3 || ^3.0",
-                "symfony/translation": "^2.3 || ^3.0",
-                "symfony/twig-bridge": "^2.3.5 || ^3.0",
-                "symfony/validator": "^2.3 || ^3.0",
+                "symfony/config": "^2.8 || ^3.2",
+                "symfony/form": "^2.8 || ^3.2",
+                "symfony/framework-bundle": "^2.8 || ^3.2",
+                "symfony/http-foundation": "^2.8 || ^3.2",
+                "symfony/property-access": "^2.8 || ^3.2",
+                "symfony/security": "^2.8 || ^3.2",
+                "symfony/translation": "^2.8 || ^3.2",
+                "symfony/twig-bridge": "^2.8 || ^3.2",
+                "symfony/validator": "^2.8 || ^3.2",
                 "twig/extensions": "^1.0",
-                "twig/twig": "^1.23 || ^2.0"
+                "twig/twig": "^1.30 || ^2.0"
             },
             "require-dev": {
                 "doctrine/orm": "^2.4",
@@ -2140,13 +2141,13 @@
                 "friendsofsymfony/rest-bundle": "^1.1 || ^2.0",
                 "jackalope/jackalope-doctrine-dbal": "^1.0",
                 "jms/serializer-bundle": "0.11 - 0.13 || ^1.0",
-                "matthiasnoback/symfony-config-test": "^0.4 || ^1.0",
+                "matthiasnoback/symfony-config-test": "^1.1",
                 "matthiasnoback/symfony-dependency-injection-test": "^0.7",
                 "nelmio/api-doc-bundle": "^2.11",
-                "sensio/framework-extra-bundle": "^2.3 || ^3.0",
+                "sensio/framework-extra-bundle": "^3.0 || ^4.0 || ^5.0",
                 "sllh/php-cs-fixer-styleci-bridge": "^2.0",
                 "sonata-project/exporter": "^1.3",
-                "symfony/phpunit-bridge": "^2.7"
+                "symfony/phpunit-bridge": "^3.3"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -2181,7 +2182,7 @@
             "keywords": [
                 "sonata"
             ],
-            "time": "2017-09-20T14:14:38+00:00"
+            "time": "2017-11-04T20:50:53+00:00"
         },
         {
             "name": "sonata-project/datagrid-bundle",
@@ -2451,16 +2452,16 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "80c82d7d41c4eed0bf27e215f27531c05b217c17"
+                "reference": "2b41b8b6d2c6edb1a5494f02f8e4129be2a44784"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/80c82d7d41c4eed0bf27e215f27531c05b217c17",
-                "reference": "80c82d7d41c4eed0bf27e215f27531c05b217c17",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/2b41b8b6d2c6edb1a5494f02f8e4129be2a44784",
+                "reference": "2b41b8b6d2c6edb1a5494f02f8e4129be2a44784",
                 "shasum": ""
             },
             "require": {
@@ -2472,8 +2473,8 @@
                 "symfony/monolog-bridge": "~2.7|~3.0|~4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8",
                 "symfony/console": "~2.3|~3.0|~4.0",
+                "symfony/phpunit-bridge": "^3.3|^4.0",
                 "symfony/yaml": "~2.3|~3.0|~4.0"
             },
             "type": "symfony-bundle",
@@ -2485,7 +2486,10 @@
             "autoload": {
                 "psr-4": {
                     "Symfony\\Bundle\\MonologBundle\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2507,7 +2511,7 @@
                 "log",
                 "logging"
             ],
-            "time": "2017-09-26T03:17:02+00:00"
+            "time": "2017-11-06T16:02:17+00:00"
         },
         {
             "name": "symfony/polyfill-apcu",

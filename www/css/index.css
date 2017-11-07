@@ -142,7 +142,7 @@ textarea {
             .header .left .menu ul li:first-child {
                 border-left: none;
             }
-            .header .left .menu ul li a {
+            .header .left .menu ul li a, .header .left .menu ul li span {
                 display: block;
                 color: #ffffff;
                 cursor: pointer;
@@ -175,7 +175,7 @@ textarea {
             .header .left .menu ul li ul li:hover {
                 background: #666666;
             }
-            .header .left .menu ul li ul li a {
+            .header .left .menu ul li ul li a, .header .left .menu ul li ul li span {
                 display: block;
                 color: #ffffff;
                 text-shadow: none;
@@ -464,7 +464,9 @@ h3 {
         margin-left: 50px;
     }
     .catalogue .product .product-image {
+        display: table-cell;
         text-align: center;
+        vertical-align: middle;
         width: 200px;
         height: 180px;
     }
@@ -789,32 +791,6 @@ ul.card-list {
     background-image: url('/image/product-inc.png');
 }
 
-
-.compare-table {
-    border-collapse: collapse;
-}
-.compare-table td {
-    padding: 5px;
-    width: 140px;
-    text-align: center;
-    vertical-align: middle;
-    border: 1px solid #a0a0a0;
-}
-.compare-table td.title {
-    font-weight: bold;
-    width: 160px;
-}
-.compare-table td.equal {
-    color: #b0b0b0;
-}
-.compare-table td.article {
-    text-align: left;
-}
-    .compare-table td.article a {
-        display: block;
-        margin-bottom: 5px;
-    }
-
 .price-list-table {
     width: 100%;
     border-collapse: collapse;
@@ -832,6 +808,10 @@ ul.card-list {
     .price-list-table td.category {
         font-weight: bold;
         padding-left: 50px;
+    }
+    .price-list-table td.subcategory {
+        font-weight: bold;
+        padding-left: 75px;
     }
     .price-list-table td.price {
         font-weight: bold;

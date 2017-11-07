@@ -1,17 +1,17 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block content %}
-    <h1>Результаты поиска</h1>
-{%  if productList|length %}
-    <div class="catalogue">
+                <h1>Результаты поиска</h1>
+{% if productList|length %}
+                <div class="catalogue">
 {% for productItem in productList %}
 {% include 'AppBundle:Product:product.html.twig' with {productItem: productItem} %}
 {% endfor %}
-        <div class="clear"></div>
-    </div>
+                    <div class="clear"></div>
+                </div>
 {% else %}
-        <h2>По вашему запросу ничего не найдено.</h2>
-        <p><a href="javascript:history.go(-1)">Вернуться назад</a></p>
+                <h2>По вашему запросу ничего не найдено.</h2>
+                <p><a href="javascript:history.go(-1)">Вернуться назад</a></p>
 {% endif %}
-{{ include('AppBundle::pager.html.twig', {pager: pager, url: path('search', {text: text, page: '__page__'})}, false) }}
+{{ include('AppBundle::pager.html.twig', {pager: pager}) }}
 {% endblock %}
