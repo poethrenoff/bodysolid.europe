@@ -68,8 +68,13 @@ class ProductController extends Controller
      * Product item
      *
      * @Route("/product/{categoryName}/{id}", name="productItem")
+     *
+     * @param Request $request
+     * @param string $categoryName
+     * @param int $id
+     * @return Response
      */
-    public function productAction(Request $request, $categoryName, $id)
+    public function productAction(Request $request, $categoryName, int $id)
     {
         $productItem = $this->getDoctrine()->getManager()
             ->getRepository(Product::class)->findOneBy(['id' => $id, 'active' => true]);

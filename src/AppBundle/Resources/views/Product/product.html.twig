@@ -15,9 +15,9 @@
                             <div class="product-price">
                                 {{ productItem.price|number_format(0, '.', ' ') }} р.
                             </div>
-                            <div class="product-cart">
-                                <a href="/cart" onclick="return buyItem({{ productItem.id }}, this)">
-                                    <img src="/image/cart.png" />
+                            <div class="product-cart{% if cart().in(productItem.id) %} selected{% endif %}">
+                                <a href="{{ path('cart_add', {id: productItem.id}) }}" onclick="return buyItem($(this))">
+                                    <img src="{{ asset('image/cart.png') }}" />
                                 </a>
                             </div>
                         </div>

@@ -722,6 +722,7 @@ ul.card-list {
     border-collapse: collapse;
 }
 .cart-form table td {
+    height: 50px;
     padding: 5px;
     text-align: center;
     vertical-align: middle;
@@ -752,11 +753,11 @@ ul.card-list {
     display: table-cell;
     text-align: left;
     vertical-align: middle
-} 
+}
 .cart-form table td.title, .cart-form table td.total.price {
     font-size: 14px;
     font-weight: bold;
-} 
+}
 .cart-form table td.total.price {
     border: none;
 }
@@ -772,7 +773,7 @@ ul.card-list {
     }
 .cart-form table td.total.name, .cart-form table td.total.delete {
     border: none;
-}        
+}
 .cart-form table span.quantity {
     font-size: 18px;
     text-align: center;

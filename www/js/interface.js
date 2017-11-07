@@ -1,23 +1,29 @@
-function buyItem(id, buyLink){
-    if (!$(buyLink).parent().hasClass('selected')) {
-        $.get('/cart/add/' + id + '/', {}, function (response){
-            $(buyLink).parent().addClass('selected');
+function buyItem($buyLink){
+    if (!$buyLink.parent().hasClass('selected')) {
+        $.get($buyLink.attr('href'),function (response){
+            $($buyLink).parent().addClass('selected');
             $("div.cart").html(response);
         });
     }
     return false;
 }
 
-function incItem(incLink){
-    return shiftItem(incLink, +1);
+function incItem($incLink){
+    $.get($incLink.attr('href'),function (response){
+        $("div.cart").html(response);
+    });
+    return shiftItem($incLink, +1);
 }
 
-function decItem(decLink){
-    return shiftItem(decLink, -1);
+function decItem($decLink){
+    $.get($decLink.attr('href'),function (response){
+        $("div.cart").html(response);
+    });
+    return shiftItem($decLink, -1);
 }
 
-function shiftItem(shiftLink, shift){
-    var $row = $(shiftLink).parents('tr:first');
+function shiftItem($shiftLink, shift){
+    var $row = $shiftLink.parents('tr:first');
     var $qntInput = $row.find('input[name^=quantity]');
     var $priceInput = $row.find('input[name^=price]');
     var qnt = parseInt($qntInput.val());
@@ -30,7 +36,7 @@ function shiftItem(shiftLink, shift){
     if (qnt > 0) {
         $qntInput.val(qnt);
         $qntCell.find('span').html(qnt);
-        $costCell.html(qnt * price);
+        $costCell.html(formatRouble(qnt * price));
         
         updateCart();
     }
@@ -53,19 +59,7 @@ function updateCart(){
     var $totalQntCell = $totalRow.find('td').eq(2);
     var $totalSumCell = $totalRow.find('td').eq(3);
     $totalQntCell.html(totalQnt);
-    $totalSumCell.html(totalSum);
-    
-    var $discountInput = $('form.cart-form').find('input[name^=discount]');
-    var discount = parseFloat($discountInput.val());
-    if (!isNaN(discount)) {
-        var $finalRow = $('form.cart-form').find('tr.final');
-        var $finalSumCell = $finalRow.find('td').eq(2);
-        $finalSumCell.html(Math.round(totalSum * discount));
-    }
-    
-    $('form.cart-form').ajaxSubmit(function(response){
-        $(".cart").html(response);
-    });
+    $totalSumCell.html(formatRouble(totalSum));
 }
 
 function callback() {
@@ -77,6 +71,10 @@ function callback() {
         });
     });
     return false;
+}
+
+function formatRouble(sum){
+    return Intl.NumberFormat().format(sum) + ' р.';
 }
 
 $(function () {
@@ -96,7 +94,7 @@ $(function () {
         }, function () {
             $(this).find('.product-description').hide();
         });
-	});
+    });
     
     $('.card-tab a').click(function() {
         if (!$(this).hasClass('selected')) {
@@ -105,7 +103,7 @@ $(function () {
             
             $('.card-tab a').removeClass('selected');
             $(this).addClass('selected');
-		}
+        }
         return false;
     });
     

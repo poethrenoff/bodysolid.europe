@@ -30,8 +30,8 @@
         <div class="card-price">
             {{ productItem.price|number_format(0, '.', ' ') }} р.
         </div>
-        <div class="card-cart">
-            <a href="/cart" onclick="return buyItem({{ productItem.id }}, this)">Купить</a>
+        <div class="card-cart{% if cart().in(productItem.id) %} selected{% endif %}">
+            <a href="{{ path('cart_add', {id: productItem.id}) }}" onclick="return buyItem($(this))">Купить</a>
         </div>
     </div>
     <div class="right">

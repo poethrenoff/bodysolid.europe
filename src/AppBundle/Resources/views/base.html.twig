@@ -62,7 +62,7 @@
 {% block content %}{% endblock %}
             </div>
             <div class="cart">
-                <?= $this->cart ?>
+{{ render(controller('AppBundle:Cart:info')) }}
             </div>
             <div class="price-list">
                 <div class="title">
