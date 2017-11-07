@@ -72,13 +72,13 @@ class ProductController extends Controller
     public function productAction(Request $request, $categoryName, $id)
     {
         $productItem = $this->getDoctrine()->getManager()
-            ->getRepository(Product::class)->findActive($id);
+            ->getRepository(Product::class)->findOneBy(['id' => $id, 'active' => true]);
 
         if (!$productItem) {
             throw new NotFoundHttpException('Страница не найдена');
         }
 
-        return $this->render('AppBundle::Product/product.html.twig', array(
+        return $this->render('AppBundle::Product/item.html.twig', array(
             'productItem' => $productItem,
         ));
     }
@@ -120,7 +120,7 @@ class ProductController extends Controller
     public function bestAction(Request $request, int $limit = 4)
     {
         $productList = $this->getDoctrine()->getManager()
-                ->getRepository(Product::class)->findBy(['active' => true, 'best' => true]);
+            ->getRepository(Product::class)->findByBest();
 
         shuffle($productList);
 

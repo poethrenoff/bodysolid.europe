@@ -33,6 +33,7 @@ class ProductFileAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('product', EntityType::class, ['class' => Product::class, 'label' => 'Товар'])
+            ->add('title', TextType::class, ['label' => 'Название'])
             ->add('fileFile', FileType::class, ['label' => 'Файл', 'required' => false])
             ->add('file', TextType::class, ['label' => 'Файл (url)', 'required' => false])
             ->add('sort', IntegerType::class, ['label' => 'Порядок']);
@@ -46,7 +47,7 @@ class ProductFileAdmin extends AbstractAdmin
         $listMapper
             ->add('id', null, ['label' => 'ID'])
             ->add('product', null, ['label' => 'Товар'])
-            ->addIdentifier('file', null, ['label' => 'Файл'])
+            ->addIdentifier('title', null, ['label' => 'Название'])
             ->add('sort', null, ['label' => 'Порядок', 'editable' => true])
         ;
     }

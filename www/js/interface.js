@@ -1,17 +1,3 @@
-function compareItem(id, compareLink){
-    if (!$(compareLink).parent().hasClass('selected')) {
-        $.get('/compare/add/' + id, {}, function (response){
-            if (response.error) {
-                alert(response.error);
-            } else if (response.message) {
-                $(compareLink).parent().addClass('selected');
-                $('div.compare').html(response.message);
-            }
-        }, 'json');
-    }
-    return false;
-}
-
 function buyItem(id, buyLink){
     if (!$(buyLink).parent().hasClass('selected')) {
         $.get('/cart/add/' + id + '/', {}, function (response){
@@ -19,17 +5,6 @@ function buyItem(id, buyLink){
             $("div.cart").html(response);
         });
     }
-    return false;
-}
-
-function likeItem(id, likeLink){
-    $.get('/client/like/' + id + '/', {}, function (response) {
-        if (response) {
-            $(likeLink).removeClass('like').addClass('unlike').attr('title', 'Удалить из Избранного');
-        } else {
-            $(likeLink).removeClass('unlike').addClass('like').attr('title', 'Добавить в Избранное');
-        }
-    }, 'json');
     return false;
 }
 
@@ -104,11 +79,6 @@ function callback() {
     return false;
 }
 
-function setMark(mark) {
-    $('.vote .star').removeClass('active');
-    $('.vote .star:lt(' + mark + ')').addClass('active');
-}
-
 $(function () {
     $.supersized({
         slides: [
@@ -130,8 +100,8 @@ $(function () {
     
     $('.card-tab a').click(function() {
         if (!$(this).hasClass('selected')) {
-            $('.card-content').children().hide('slow');
-            $('#' + $(this).attr('for')).show('slow');
+            $('.card-content').children().hide(300);
+            $('#' + $(this).attr('for')).show(300);
             
             $('.card-tab a').removeClass('selected');
             $(this).addClass('selected');

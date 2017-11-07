@@ -20,6 +20,15 @@ class Product
     const DEFAULT_PICTURE = '/image/default.jpg';
 
     /**
+     * @var array
+     */
+    const STATUSES = [
+        'available' => 'В наличии',
+        'delivery'  => 'Ожидается',
+        'order'     => 'Под заказ',
+    ];
+
+    /**
      * @var int
      *
      * @ORM\Column(type="integer")
@@ -268,6 +277,14 @@ class Product
     }
 
     /**
+     * @return string
+     */
+    public function getStatusTitle(): ?string
+    {
+        return self::STATUSES[$this->status];
+    }
+
+    /**
      * @param string $status
      * @return Product
      */
@@ -326,6 +343,38 @@ class Product
         $picture->setImage(self::DEFAULT_PICTURE);
 
         return $picture;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPictures()
+    {
+        return $this->pictures;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVideos()
+    {
+        return $this->videos;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProperties()
+    {
+        return $this->properties;
     }
 
     /**

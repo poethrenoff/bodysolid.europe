@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use AppBundle\Entity\Product;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Brand;
 
@@ -43,11 +44,7 @@ class ProductAdmin extends AbstractAdmin
             ->add('title', TextType::class, ['label' => 'Название'])
             ->add('price', NumberType::class, ['label' => 'Цена'])
             ->add('description', TextareaType::class, ['label' => 'Подробное описание', 'required' => false, 'attr' => ['class' => 'editor']])
-            ->add('status', ChoiceType::class, ['label' => 'Статус', 'choices' => [
-                'В наличии' => 'available',
-                'Ожидается' => 'delivery',
-                'Под заказ' => 'order',
-            ]])
+            ->add('status', ChoiceType::class, ['label' => 'Статус', 'choices' => array_flip(Product::STATUSES)])
             ->add('best', CheckboxType::class, ['label' => 'Лучший товар', 'required' => false])
             ->add('active', CheckboxType::class, ['label' => 'Видимость', 'required' => false]);
     }

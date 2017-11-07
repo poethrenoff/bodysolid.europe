@@ -33,6 +33,23 @@ class ProductRepository extends EntityRepository
     }
 
     /**
+     * @return array
+     */
+    public function findByBest(): array
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p')
+            ->innerJoin('p.category', 'c')
+            ->where('p.best = :best')
+            ->andwhere('p.active = :active')
+            ->andWhere('c.active = :active')
+            ->setParameter('best', true)
+            ->setParameter('active', true);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * @param string $text
      * @param int $offset
      * @param int $limit

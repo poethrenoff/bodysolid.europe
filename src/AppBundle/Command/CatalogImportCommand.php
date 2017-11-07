@@ -55,12 +55,7 @@ class CatalogImportCommand extends DoctrineCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $filename = $this->getContainer()->get('kernel')->getCacheDir() . '/neotren.xml';
-        if (!file_exists($filename)) {
-            file_put_contents($filename, file_get_contents(self::IMPORT_URL));
-        }
-
-        $import = @simplexml_load_file($filename);
+        $import = @simplexml_load_file(self::IMPORT_URL);
         if (!$import) {
             return;
         }
@@ -168,6 +163,7 @@ class CatalogImportCommand extends DoctrineCommand
                 foreach ($offerXml->urlManual as $fileXml) {
                     $filePath = $this->upload((string)$fileXml, ProductFile::class, 'file');
                     $productFile = (new ProductFile())
+                        ->setTitle('Инструкция')
                         ->setFile($filePath)
                         ->setProduct($product)
                         ->setSort(
@@ -228,7 +224,7 @@ class CatalogImportCommand extends DoctrineCommand
         $name = pathinfo($url, PATHINFO_BASENAME);
         $path = $fieldDesc['directory'] . DIRECTORY_SEPARATOR . $name;
         if (!file_exists($path)) {
-            $data = @file_get_contents($url);
+            $data = @file_get_contents(str_replace(' ', '%20', $url));
             if ($data) {
                 @file_put_contents($path, $data);
             }

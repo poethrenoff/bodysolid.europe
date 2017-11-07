@@ -36,6 +36,14 @@ class ProductFile
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string")
+     */
+    protected $title;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string")
      */
     protected $file;
@@ -86,6 +94,24 @@ class ProductFile
     public function setProduct(?Product $product): ProductFile
     {
         $this->product = $product;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return ProductFile
+     */
+    public function setTitle(?string $title): ProductFile
+    {
+        $this->title = $title;
         return $this;
     }
 

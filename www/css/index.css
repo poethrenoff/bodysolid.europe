@@ -243,7 +243,7 @@ textarea {
     .content .body-focus-left .male_female {
         position: absolute;
         z-index: 3;
-    }   
+    }
         .content .body-focus-left .male_female a {
             color: #b0b0b0;
         }
@@ -656,6 +656,9 @@ h3 {
     #card-content-video {
         text-align: center;
     }
+    #card-content-video iframe {
+        margin-bottom: 20px;
+    }
 
 ul.card-gallery {
     padding: 0px;
@@ -706,7 +709,6 @@ ul.card-list {
     cursor: pointer;
 }
 
-
 .noselect {
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -714,7 +716,6 @@ ul.card-list {
     -o-user-select: none;
     user-select: none;
 }
-
 
 .cart-form table {
     width: 100%;
