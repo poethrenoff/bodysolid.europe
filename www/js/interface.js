@@ -63,7 +63,7 @@ function updateCart(){
 }
 
 function callback() {
-    $.get('/callback', function (response){
+    $.get('/app_dev.php/callback', function (response){
         $(response).modal({
             opacity: 30,
             overlayClose: true,
@@ -112,23 +112,4 @@ $(function () {
             location.href = $(this).attr('href');
         }
     });
-    
-    $('.vote .star').mouseenter(function(){
-        if ($('.vote').hasClass('enabled')) {
-            setMark($(this).attr('mark'));
-        }
-    }).click(function(){
-        if ($('.vote').hasClass('enabled')) {
-            $.post('/product/vote/' + $(this).attr('id'), {mark: $(this).attr('mark')}, function(data){
-                var rating = Math.round(data.rating);
-                $('.vote').attr('rating', rating);
-                $('.vote').mouseleave().removeClass('enabled');
-            }, 'json');
-        }
-    });
-    $('.vote').mouseleave(function(){
-        if ($('.vote').hasClass('enabled')) {
-            setMark($(this).attr('rating'));
-        }
-    });    
 });

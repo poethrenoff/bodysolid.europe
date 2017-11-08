@@ -2,7 +2,7 @@
 
 namespace AppBundle\Service;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Class Cart
@@ -15,21 +15,21 @@ class Cart
     const SESSION_VAR = '__CART__';
 
     /**
-     * @var SessionInterface
+     * @var Session
      */
-    private $session;
+    protected $session;
 
     /**
      * @var array
      */
-    private $items = array();
+    protected $items = array();
 
     /**
      * Cart constructor
      *
-     * @param SessionInterface $session
+     * @param Session $session
      */
-    public function __construct(SessionInterface $session)
+    public function __construct(Session $session)
     {
         $this->session = $session;
 

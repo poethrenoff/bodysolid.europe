@@ -3,6 +3,7 @@
 namespace AppBundle\Twig;
 
 use AppBundle\Service\Cart;
+use AppBundle\Service\Preference;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -16,17 +17,24 @@ class AppExtension extends \Twig_Extension
     protected $cart;
 
     /**
+     * @var Preference
+     */
+    protected $preference;
+
+    /**
      * @var RequestStack
      */
     private $requestStack;
 
     /**
      * @param Cart $cart
+     * @param Preference $preference
      * @param RequestStack $requestStack
      */
-    public function __construct(Cart $cart, RequestStack $requestStack)
+    public function __construct(Cart $cart, Preference $preference, RequestStack $requestStack)
     {
         $this->cart = $cart;
+        $this->preference = $preference;
         $this->requestStack = $requestStack;
     }
 
@@ -37,6 +45,7 @@ class AppExtension extends \Twig_Extension
     {
         return [
             new \Twig_Function('cart', array($this, 'cart')),
+            new \Twig_Function('preference', array($this, 'preference')),
             new \Twig_Function('page', array($this, 'page')),
         ];
     }
@@ -47,6 +56,16 @@ class AppExtension extends \Twig_Extension
     public function cart()
     {
         return $this->cart;
+    }
+
+    /**
+     * @param  string $name
+     * @param  string|null $default
+     * @return string
+     */
+    public function preference(string $name, string $default = null)
+    {
+        return $this->preference->get($name, $default);
     }
 
     /**

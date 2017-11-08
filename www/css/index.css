@@ -23,7 +23,11 @@ form label {
     width: 150px;
     margin-top: 10px;
 }
-span.require, span.error {
+form ul {
+    margin: 5px 0 5px 150px;
+    list-style: none;
+}
+span.require, form li {
     color: #a32c14;
 }
 
@@ -36,7 +40,7 @@ input[type="text"], input[type="password"] {
     border: 1px solid #a0a0a0;
 }
 
-input[type="button"], input[type="submit"] {
+input[type="button"], input[type="submit"], button[type="submit"] {
     color: white;
     font-size: 12px;
     font-family: Tahoma, Geneva, sans-serif;

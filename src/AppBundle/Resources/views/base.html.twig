@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{% block title %}BodySolid-Europe - профессиональное силовое оборудование{% endblock %}</title>
-        <meta name="keywords" content="{% block keywords %}силовые тренажеры BodySolid{% endblock %}"/>
-        <meta name="description" content="{% block description %}BodySolid - тренажеры, силовое оборудование с доставкой по всей России{% endblock %}"/>
+        <title>{% block title %}{{ preference('title') }}{% endblock %}</title>
+        <meta name="keywords" content="{% block keywords %}{{ preference('keywords') }}{% endblock %}"/>
+        <meta name="description" content="{% block description %}{{ preference('description') }}{% endblock %}"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 {% block stylesheets %}
         <link rel="shortcut icon" href="{{ asset('image/favicon.ico') }}"/>
@@ -33,15 +33,15 @@
                     </div>
                     <div class="contact">
                         <div class="phone">
-                            <p>(495) 518-52-97, (495) 518-14-19</p>
+                            <p>{{ preference('site_phone') }}</p>
                         </div>
                         <div class="callback">
-                            <a href="/callback" title="Обратный звонок" onclick="return callback()">
+                            <a href="{{ path('callback') }}" title="Обратный звонок" onclick="return callback()">
                                 <img src="{{ asset('image/top_phone.png') }}"/>
                             </a>
                         </div>
                         <div class="email">
-                            <a href="mailto:andreisport@bodysolid.ru">
+                            <a href="mailto:{{ preference('site_email') }}">
                                 <img src="{{ asset('image/top_mail.png') }}"/>
                             </a>
                         </div>

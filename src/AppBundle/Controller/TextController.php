@@ -21,7 +21,7 @@ class TextController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('AppBundle::Text/index.html.twig', array(
+        return $this->render('AppBundle::Text/text.html.twig', array(
             'textItem' => $this->getText($request->get('_route'))
         ));
     }

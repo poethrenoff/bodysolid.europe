@@ -52,7 +52,7 @@ class Category
     /**
      * @var string
      *
-     * @Assert\Regex(pattern="/^[a-z0-9-]+$/i")
+     * @Assert\Regex(pattern="/^[a-z0-9-_]+$/i")
      * @ORM\Column(type="string")
      */
     protected $name;
