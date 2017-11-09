@@ -63,7 +63,7 @@ function updateCart(){
 }
 
 function callback() {
-    $.get('/app_dev.php/callback', function (response){
+    $.get('/callback', function (response){
         $(response).modal({
             opacity: 30,
             overlayClose: true,

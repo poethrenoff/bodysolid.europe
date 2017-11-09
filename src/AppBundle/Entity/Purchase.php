@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -26,7 +27,7 @@ class Purchase
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="Поле обязательно к заполнению")
+     * @Assert\NotBlank(message="Поле обязательно для заполнения")
      * @ORM\Column(type="string")
      */
     protected $person;
@@ -35,7 +36,7 @@ class Purchase
      * @var string
      *
      * @Assert\Email(message="Неверное значение email")
-     * @Assert\NotBlank(message="Поле обязательно к заполнению")
+     * @Assert\NotBlank(message="Поле обязательно для заполнения")
      * @ORM\Column(type="string")
      */
     protected $email;
@@ -43,7 +44,7 @@ class Purchase
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="Поле обязательно к заполнению")
+     * @Assert\NotBlank(message="Поле обязательно для заполнения")
      * @ORM\Column(type="string")
      */
     protected $phone;
@@ -51,7 +52,7 @@ class Purchase
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="Поле обязательно к заполнению")
+     * @Assert\NotBlank(message="Поле обязательно для заполнения")
      * @ORM\Column(type="text")
      */
     protected $address;
@@ -77,7 +78,7 @@ class Purchase
      * @Assert\NotBlank()
      * @ORM\Column(type="decimal", scale=2)
      */
-    protected $sum;
+    protected $sum = 0;
 
     /**
      * @var string
@@ -266,9 +267,29 @@ class Purchase
     }
 
     /**
-     * @return ArrayCollection
+     * @param PurchaseItem $item
+     * @return Purchase
      */
-    public function getItems()
+    public function addItem(PurchaseItem $item): Purchase
+    {
+        $this->items[] = $item;
+        return $this;
+    }
+
+    /**
+     * @param PurchaseItem $item
+     * @return Purchase
+     */
+    public function removeItem(PurchaseItem $item): Purchase
+    {
+        $this->items->removeElement($item);
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getItems(): Collection
     {
         return $this->items;
     }

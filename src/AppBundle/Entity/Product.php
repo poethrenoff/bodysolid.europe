@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -346,33 +347,33 @@ class Product
     }
 
     /**
-     * @return mixed
+     * @return Collection
      */
-    public function getPictures()
+    public function getPictures(): Collection
     {
         return $this->pictures;
     }
 
     /**
-     * @return mixed
+     * @return Collection
      */
-    public function getFiles()
+    public function getFiles(): Collection
     {
         return $this->files;
     }
 
     /**
-     * @return mixed
+     * @return Collection
      */
-    public function getVideos()
+    public function getVideos(): Collection
     {
         return $this->videos;
     }
 
     /**
-     * @return mixed
+     * @return Collection
      */
-    public function getProperties()
+    public function getProperties(): Collection
     {
         return $this->properties;
     }

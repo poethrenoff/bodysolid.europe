@@ -24,14 +24,19 @@ form label {
     margin-top: 10px;
 }
 form ul {
-    margin: 5px 0 5px 150px;
+    margin: 0;
+    display: inline-block;
     list-style: none;
 }
+.modal-form form ul {
+    margin-left: 150px;
+}
+
 span.require, form li {
     color: #a32c14;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="email"] {
     font-size: 12px;
     font-family: Tahoma, Geneva, sans-serif;
     width: 220px;

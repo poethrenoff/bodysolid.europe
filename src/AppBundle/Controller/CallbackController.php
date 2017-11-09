@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use AppBundle\Service\Preference;
+use AppBundle\Entity\Callback;
 use AppBundle\Form\CallbackType;
 
 class CallbackController extends Controller
@@ -51,6 +52,10 @@ class CallbackController extends Controller
      */
     public function indexAction(Request $request)
     {
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToRoute('index');
+        }
+
         $flush = $this->session->getFlashBag();
 
         foreach ($flush->get('success') as $message) {
@@ -59,29 +64,15 @@ class CallbackController extends Controller
             }
         }
 
-        $form = $this->createForm(CallbackType::class, null, [
+        $callback = new Callback();
+        $form = $this->createForm(CallbackType::class, $callback, [
             'action' => $this->generateUrl('callback')
         ]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $from_email = $this->preference->get('from_email');
-            $from_name = $this->preference->get('from_name');
-            $callback_email = $this->preference->get('callback_email');
-            $callback_subject = $this->preference->get('callback_subject');
-
-            $message = (new \Swift_Message())
-                ->setSubject($callback_subject)
-                ->setFrom($from_email, $from_name)
-                ->setTo($callback_email)
-                ->setBody(
-                    $this->renderView('AppBundle::Callback/message.html.twig', array(
-                        'callback' => $form->getData(),
-                    )),
-                    'text/html'
-                );
-            $this->get('mailer')->send($message);
+            $this->sendMessage($callback);
 
             $flush->add('success', true);
 
@@ -91,5 +82,30 @@ class CallbackController extends Controller
         return $this->render('AppBundle::Callback/form.html.twig', array(
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * Send message
+     *
+     * @param Callback $callback
+     */
+    protected function sendMessage(Callback $callback)
+    {
+        $from_email = $this->preference->get('from_email');
+        $from_name = $this->preference->get('from_name');
+        $callback_email = $this->preference->get('callback_email');
+        $callback_subject = $this->preference->get('callback_subject');
+
+        $message = (new \Swift_Message())
+            ->setSubject($callback_subject)
+            ->setFrom($from_email, $from_name)
+            ->setTo($callback_email)
+            ->setBody(
+                $this->renderView('AppBundle::Callback/message.html.twig', array(
+                    'callback' => $callback,
+                )),
+                'text/html'
+            );
+        $this->mailer->send($message);
     }
 }

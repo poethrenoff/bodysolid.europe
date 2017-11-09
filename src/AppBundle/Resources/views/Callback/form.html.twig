@@ -11,12 +11,14 @@
 
     {{ form_start(form, {'attr': {'id': 'callback', 'novalidate': 'novalidate'}}) }}
 
-    <label>Ваше имя <span class="require">*</span></label>
+    <label>Контактное лицо <span class="require">*</span></label>
     {{ form_widget(form.person) }}
     {{ form_errors(form.person) }}
+    <br/>
     <label>Телефон <span class="require">*</span></label>
     {{ form_widget(form.phone) }}
     {{ form_errors(form.phone) }}
+    <br/>
     <label>Комментарий</label><br/>
     {{ form_widget(form.comment) }}
     {{ form_errors(form.comment) }}

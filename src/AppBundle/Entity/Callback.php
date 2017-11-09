@@ -13,14 +13,14 @@ class Callback
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="Поле обязательно к заполнению")
+     * @Assert\NotBlank(message="Поле обязательно для заполнения")
      */
     protected $person;
 
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="Поле обязательно к заполнению")
+     * @Assert\NotBlank(message="Поле обязательно для заполнения")
      */
     protected $phone;
 

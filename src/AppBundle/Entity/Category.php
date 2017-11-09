@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Cocur\Slugify\Slugify;
@@ -220,9 +221,9 @@ class Category
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getCategories()
+    public function getCategories(): Collection
     {
         return $this->categories->filter(function ($category) {
             return $category->isActive();
@@ -230,9 +231,9 @@ class Category
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getProducts()
+    public function getProducts(): Collection
     {
         return $this->products->filter(function ($product) {
             return $product->isActive();
