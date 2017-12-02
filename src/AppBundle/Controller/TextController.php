@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +21,7 @@ class TextController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('AppBundle::Text/text.html.twig', array(
+        return $this->render('@App/Text/text.html.twig', array(
             'textItem' => $this->getText($request->get('_route'))
         ));
     }
@@ -32,7 +32,7 @@ class TextController extends Controller
      */
     public function blockAction(string $name)
     {
-        return $this->render('AppBundle::Text/block.html.twig', array(
+        return $this->render('@App/Text/block.html.twig', array(
             'textItem' => $this->getText($name)
         ));
     }

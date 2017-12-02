@@ -36,7 +36,7 @@
                             <p>{{ preference('site_phone') }}</p>
                         </div>
                         <div class="callback">
-                            <a href="{{ path('callback') }}" title="Обратный звонок" onclick="return callback()">
+                            <a href="{{ path('callback') }}" title="Обратный звонок" onclick="return callback('{{ path('callback') }}')">
                                 <img src="{{ asset('image/top_phone.png') }}"/>
                             </a>
                         </div>

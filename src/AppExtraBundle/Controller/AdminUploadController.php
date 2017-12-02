@@ -2,7 +2,7 @@
 
 namespace AppExtraBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -34,7 +34,7 @@ class AdminUploadController extends Controller
 
         $file = $request->files->get('upload');
         if (!$file) {
-            return $this->render('AppExtraBundle::upload.html.twig', array(
+            return $this->render('@AppExtra/upload.html.twig', array(
                 'CKEditorFuncNum' => $CKEditorFuncNum,
                 'errorMessage' => 'Отсутствует файл для закачки!'
             ));
@@ -43,13 +43,13 @@ class AdminUploadController extends Controller
         try {
             $filePath = $this->uploadManager->upload($file);
         } catch (FileException $e) {
-            return $this->render('AppExtraBundle::upload.html.twig', array(
+            return $this->render('@AppExtra/upload.html.twig', array(
                 'CKEditorFuncNum' => $CKEditorFuncNum,
                 'errorMessage' => 'Ошибка при загрузке файла!'
             ));
         }
 
-        return $this->render('AppExtraBundle::upload.html.twig', array(
+        return $this->render('@AppExtra/upload.html.twig', array(
             'CKEditorFuncNum' => $CKEditorFuncNum,
             'filePath' => $filePath
         ));

@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,19 +46,17 @@ class PurchaseController extends Controller
      * PurchaseController constructor
      *
      * @param Cart $cart
-     * @param Session $session
      * @param Preference $preference
      * @param EntityManagerInterface $entityManager
      * @param \Swift_Mailer $mailer
      */
     public function __construct(Cart $cart,
-                                Session $session,
                                 Preference $preference,
                                 EntityManagerInterface $entityManager,
                                 \Swift_Mailer $mailer)
     {
         $this->cart = $cart;
-        $this->session = $session;
+        $this->session = new Session();
         $this->preference = $preference;
         $this->entityManager = $entityManager;
         $this->mailer = $mailer;
@@ -78,7 +76,7 @@ class PurchaseController extends Controller
 
         foreach ($flush->get('success') as $message) {
             if ($message) {
-                return $this->render('AppBundle::Purchase/success.html.twig');
+                return $this->render('@App/Purchase/success.html.twig');
             }
         }
 
@@ -127,7 +125,7 @@ class PurchaseController extends Controller
             return $this->redirectToRoute('purchase');
         }
 
-        return $this->render('AppBundle::Purchase/form.html.twig', array(
+        return $this->render('@App/Purchase/form.html.twig', array(
             'productList' => $productList, 'form' => $form->createView(),
         ));
     }
@@ -151,7 +149,7 @@ class PurchaseController extends Controller
             ->setFrom($from_email, $from_name)
             ->setTo($manager_email)
             ->setBody(
-                $this->renderView('AppBundle::Purchase/manager_message.html.twig', array(
+                $this->renderView('@App/Purchase/manager_message.html.twig', array(
                     'purchase' => $purchase
                 )),
                 'text/html'
@@ -163,7 +161,7 @@ class PurchaseController extends Controller
             ->setFrom($from_email, $from_name)
             ->setTo($purchase->getEmail())
             ->setBody(
-                $this->renderView('AppBundle::Purchase/client_message.html.twig', array(
+                $this->renderView('@App/Purchase/client_message.html.twig', array(
                     'purchase' => $purchase
                 )),
                 'text/html'

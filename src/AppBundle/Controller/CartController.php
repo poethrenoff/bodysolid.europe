@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,7 +42,7 @@ class CartController extends Controller
             $productList[$item->id] = $this->getProduct($item->id);
         }
 
-        return $this->render('AppBundle::Cart/cart.html.twig', [
+        return $this->render('@App/Cart/cart.html.twig', [
             'productList' => $productList
         ]);
     }
@@ -57,7 +57,7 @@ class CartController extends Controller
      */
     public function infoAction(Request $request)
     {
-        return $this->render('AppBundle::Cart/info.html.twig');
+        return $this->render('@App/Cart/info.html.twig');
     }
 
     /**

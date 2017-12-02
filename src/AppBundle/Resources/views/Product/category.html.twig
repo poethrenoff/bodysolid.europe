@@ -1,4 +1,4 @@
-{% extends 'AppBundle::base.html.twig' %}
+{% extends '@App/base.html.twig' %}
 
 {% block content %}
                 <div class="catalogue">
@@ -14,10 +14,10 @@
 {% endif %}
 {% if productList|length %}
 {% for productItem in productList %}
-{% include 'AppBundle:Product:product.html.twig' with {productItem: productItem} %}
+{% include '@App/Product/product.html.twig' with {productItem: productItem} %}
 {% endfor %}
 {% endif %}
                     <div class="clear"></div>
                 </div>
-{{ include('AppBundle::pager.html.twig', {pager: pager}) }}
+{{ include('@App/pager.html.twig', {pager: pager}) }}
 {% endblock %}

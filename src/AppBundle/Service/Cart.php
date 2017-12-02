@@ -26,12 +26,10 @@ class Cart
 
     /**
      * Cart constructor
-     *
-     * @param Session $session
      */
-    public function __construct(Session $session)
+    public function __construct()
     {
-        $this->session = $session;
+        $this->session = new Session();
 
         if (!$this->session->has(self::SESSION_VAR) || !is_array($this->session->get(self::SESSION_VAR))) {
             $this->session->set(self::SESSION_VAR, array());

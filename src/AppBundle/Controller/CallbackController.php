@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,15 +31,13 @@ class CallbackController extends Controller
     /**
      * CallbackController constructor
      *
-     * @param Session $session
      * @param Preference $preference
      * @param \Swift_Mailer $mailer
      */
-    public function __construct(Session $session,
-                                Preference $preference,
+    public function __construct(Preference $preference,
                                 \Swift_Mailer $mailer)
     {
-        $this->session = $session;
+        $this->session = new Session();
         $this->preference = $preference;
         $this->mailer = $mailer;
     }
@@ -60,7 +58,7 @@ class CallbackController extends Controller
 
         foreach ($flush->get('success') as $message) {
             if ($message) {
-                return $this->render('AppBundle::Callback/success.html.twig');
+                return $this->render('@App/Callback/success.html.twig');
             }
         }
 
@@ -79,7 +77,7 @@ class CallbackController extends Controller
             return $this->redirectToRoute('callback');
         }
 
-        return $this->render('AppBundle::Callback/form.html.twig', array(
+        return $this->render('@App/Callback/form.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -101,7 +99,7 @@ class CallbackController extends Controller
             ->setFrom($from_email, $from_name)
             ->setTo($callback_email)
             ->setBody(
-                $this->renderView('AppBundle::Callback/message.html.twig', array(
+                $this->renderView('@App/Callback/message.html.twig', array(
                     'callback' => $callback,
                 )),
                 'text/html'

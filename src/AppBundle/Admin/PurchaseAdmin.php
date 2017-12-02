@@ -83,7 +83,7 @@ class PurchaseAdmin extends AbstractAdmin
                 'label' => 'Операции',
                 'actions' => [
                     'edit' => [],
-                    'product_item' => ['template' => 'AppBundle::Admin/purchase_item.html.twig'],
+                    'product_item' => ['template' => '@App/Admin/purchase_item.html.twig'],
                 ]]);
     }
 

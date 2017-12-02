@@ -62,8 +62,8 @@ function updateCart(){
     $totalSumCell.html(formatRouble(totalSum));
 }
 
-function callback() {
-    $.get('/callback', function (response){
+function callback(callbackUrl) {
+    $.get(callbackUrl, function (response){
         $(response).modal({
             opacity: 30,
             overlayClose: true,

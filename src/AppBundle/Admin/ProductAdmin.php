@@ -79,10 +79,10 @@ class ProductAdmin extends AbstractAdmin
             ->add('_action', 'actions', [
                 'label' => 'Операции',
                 'actions' => [
-                    'product_picture' => ['template' => 'AppBundle::Admin/product_picture.html.twig'],
-                    'product_file' => ['template' => 'AppBundle::Admin/product_file.html.twig'],
-                    'product_video' => ['template' => 'AppBundle::Admin/product_video.html.twig'],
-                    'product_property' => ['template' => 'AppBundle::Admin/product_property.html.twig'],
+                    'product_picture' => ['template' => '@App/Admin/product_picture.html.twig'],
+                    'product_file' => ['template' => '@App/Admin/product_file.html.twig'],
+                    'product_video' => ['template' => '@App/Admin/product_video.html.twig'],
+                    'product_property' => ['template' => '@App/Admin/product_property.html.twig'],
                 ]]);
     }
 }

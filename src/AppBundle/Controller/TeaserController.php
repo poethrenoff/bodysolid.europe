@@ -16,7 +16,7 @@ class TeaserController extends Controller
         $teaserList = $this->getDoctrine()->getManager()
             ->getRepository(Teaser::class)->findBy(['active' => true], ['sort' => 'asc']);
 
-        return $this->render('AppBundle::Teaser/block.html.twig', array(
+        return $this->render('@App/Teaser/block.html.twig', array(
             'teaserList' => $teaserList
         ));
     }

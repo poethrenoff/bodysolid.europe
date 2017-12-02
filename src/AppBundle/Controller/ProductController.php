@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +29,7 @@ class ProductController extends Controller
         $categoryList = $this->getDoctrine()->getManager()
             ->getRepository(Category::class)->findBy(['active' => true, 'category' => null]);
 
-        return $this->render('AppBundle::Product/menu.html.twig', array(
+        return $this->render('@App/Product/menu.html.twig', array(
             'categoryList' => $categoryList,
         ));
     }
@@ -57,7 +57,7 @@ class ProductController extends Controller
         $productList = $this->getDoctrine()->getManager()
             ->getRepository(Product::class)->findByCategory($categoryItem, $offset, self::PRODUCTS_PER_PAGE);
 
-        return $this->render('AppBundle::Product/category.html.twig', array(
+        return $this->render('@App/Product/category.html.twig', array(
             'categoryItem' => $categoryItem,
             'productList' => $productList,
             'pager' => Pager::build(count($productList), self::PRODUCTS_PER_PAGE, $page),
@@ -83,7 +83,7 @@ class ProductController extends Controller
             throw new NotFoundHttpException('Страница не найдена');
         }
 
-        return $this->render('AppBundle::Product/item.html.twig', array(
+        return $this->render('@App/Product/item.html.twig', array(
             'productItem' => $productItem,
         ));
     }
@@ -108,7 +108,7 @@ class ProductController extends Controller
                 ->getRepository(Product::class)->findByText($text, $offset, self::PRODUCTS_PER_PAGE);
         }
 
-        return $this->render('AppBundle::Product/search.html.twig', array(
+        return $this->render('@App/Product/search.html.twig', array(
             'text' => $text,
             'productList' => $productList,
             'pager' => Pager::build(count($productList), self::PRODUCTS_PER_PAGE, $page),
@@ -129,7 +129,7 @@ class ProductController extends Controller
 
         shuffle($productList);
 
-        return $this->render('AppBundle::Product/best.html.twig', array(
+        return $this->render('@App/Product/best.html.twig', array(
             'productList' => array_slice($productList, 0, $limit),
         ));
     }
@@ -147,7 +147,7 @@ class ProductController extends Controller
         $categoryList = $this->getDoctrine()->getManager()
             ->getRepository(Category::class)->findBy(['active' => true, 'category' => null]);
 
-        return $this->render('AppBundle::Product/price.html.twig', array(
+        return $this->render('@App/Product/price.html.twig', array(
             'categoryList' => $categoryList
         ));
     }
