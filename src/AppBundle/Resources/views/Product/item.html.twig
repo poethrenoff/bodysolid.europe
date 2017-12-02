@@ -24,7 +24,7 @@
         </div>
         <div class="card-image">
             <a class="product-image" href="{{ productItem.image }}" title="">
-                <img src="{{ web_image(productItem.image).cropResize(180, 180) }}" border="0">
+                <img src="{{ image(productItem.image).cropResize(180, 180) }}" border="0">
             </a>
         </div>
         <div class="card-price">
@@ -61,7 +61,7 @@
 {% if not loop.first %}
                     <li>
                         <a class="product-gallery" rel="gallery" href="{{ picture.image }}" title="">
-                            <img src="{{ web_image(picture.image).cropResize(180, 180) }}" border="0">
+                            <img src="{{ image(picture.image).cropResize(180, 180) }}" border="0">
                         </a>
                     </li>
 {% endif %}

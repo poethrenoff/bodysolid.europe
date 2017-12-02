@@ -26,7 +26,7 @@
         <tr>
             <td class="name">
                 <div class="cart_image_container">
-                    <img src="{{ web_image(productList[item.id].image).cropResize(50, 50) }}" alt=""/>
+                    <img src="{{ image(productList[item.id].image).cropResize(50, 50) }}" alt=""/>
                 </div>
                 <div class="cart_title_container">
                     <a href="{{ path('productItem', {categoryName: productList[item.id].category.name, id: productList[item.id].id}) }}">{{ productList[item.id].title }}</a>

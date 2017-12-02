@@ -20,8 +20,9 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-            new Gregwar\ImageBundle\GregwarImageBundle(),
+
             new AdminUploadBundle\AdminUploadBundle(),
+            new ImageBundle\ImageBundle(),
             new AppBundle\AppBundle(),
         ];
 

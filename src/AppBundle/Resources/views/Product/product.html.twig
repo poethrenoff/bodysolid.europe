@@ -7,7 +7,7 @@
                             </div>
                             <div class="product-image">
                                 <a href="{{ path('productItem', {categoryName: productItem.category.name, id: productItem.id}) }}">
-                                    <img src="{{ web_image(productItem.image).cropResize(180, 180) }}" />
+                                    <img src="{{ image(productItem.image).cropResize(180, 180) }}" />
                                 </a>
                             </div>
                         </div>

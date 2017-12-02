@@ -124,12 +124,11 @@ sonata_admin:
                 items:
                     - sonata.admin.preference
 
-# Gregwar Image Configuration
-gregwar_image:
-    web_dir: "%web_dir%"
-    cache_dir:  "upload/cache"
-    fallback_image: "%web_dir%/image/default.jpg"
-    throw_exception: false
+# ImageBundle Configuration
+image:
+    web_dir: '%web_dir%'
+    cache_dir: 'upload/cache'
+    fallback_image: '%web_dir%/image/default.jpg'
 
 # AdminUpload Configuration
 admin_upload:

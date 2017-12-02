@@ -5,7 +5,8 @@
     "autoload": {
         "psr-4": {
             "AppBundle\\": "src/AppBundle",
-            "AdminUploadBundle\\": "src/AdminUploadBundle"
+            "AdminUploadBundle\\": "src/AdminUploadBundle",
+            "ImageBundle\\": "src/ImageBundle"
         },
         "classmap": [
             "app/AppKernel.php",
@@ -24,7 +25,7 @@
         "php": "^7.1",
         "doctrine/doctrine-bundle": "^1.8",
         "doctrine/orm": "^2.5",
-        "gregwar/image-bundle": "^2.1",
+        "gregwar/image": "^2.0",
         "incenteev/composer-parameter-handler": "^2.1",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^5.1",
