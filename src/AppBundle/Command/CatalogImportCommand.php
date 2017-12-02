@@ -6,7 +6,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Doctrine\Bundle\DoctrineBundle\Command\DoctrineCommand;
-use AdminUploadBundle\Service\AdminUploadManager;
+use AppExtraBundle\Service\AdminUploadManager;
 use AppBundle\Entity\Brand;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Product;

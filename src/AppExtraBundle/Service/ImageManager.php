@@ -1,15 +1,15 @@
 <?php
 
-namespace ImageBundle\Services;
+namespace AppExtraBundle\Service;
 
-use ImageBundle\Entity\Image;
+use AppExtraBundle\Entity\Image;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Image manipulation service.
+ * Class ImageManager
  */
-class ImageHandling
+class ImageManager
 {
     /**
      * @var string
@@ -45,11 +45,13 @@ class ImageHandling
     {
         $this->assetPackages = $assetPackages;
 
-        $this->webDirectory = $container->getParameter('image.web_dir');
-        $this->cacheDirectory = $container->getParameter('image.cache_dir');
-        $this->cacheDirMode = octdec($container->getParameter('image.cache_dir_mode'));
-        $this->throwException = $container->getParameter('image.throw_exception');
-        $this->fallbackImage = $container->getParameter('image.fallback_image');
+        $params = $container->getParameter('image');
+
+        $this->webDirectory = $params['web_dir'];
+        $this->cacheDirectory = $params['cache_dir'];
+        $this->cacheDirMode = octdec($params['cache_dir_mode']);
+        $this->throwException = $params['throw_exception'];
+        $this->fallbackImage = $params['fallback_image'];
     }
 
     /**

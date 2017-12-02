@@ -124,26 +124,25 @@ sonata_admin:
                 items:
                     - sonata.admin.preference
 
-# ImageBundle Configuration
-image:
-    web_dir: '%web_dir%'
-    cache_dir: 'upload/cache'
-    fallback_image: '%web_dir%/image/default.jpg'
-
-# AdminUpload Configuration
-admin_upload:
-    directory: '%web_dir%/upload'
-    alias:     '/upload'
-    entities:
-        AppBundle\Entity\ProductPicture:
-            image:
-                directory: '%web_dir%/upload/product'
-                alias: '/upload/product'
-        AppBundle\Entity\ProductFile:
-            file:
-                directory: '%web_dir%/upload/product'
-                alias: '/upload/product'
-        AppBundle\Entity\Teaser:
-            image:
-                directory: '%web_dir%/upload/teaser'
-                alias: '/upload/teaser'
+# AppExtraBundle Configuration
+app_extra:
+    image:
+        web_dir: '%web_dir%'
+        cache_dir: 'upload/cache'
+        fallback_image: '%web_dir%/image/default.jpg'
+    upload:
+        directory: '%web_dir%/upload'
+        alias:     '/upload'
+        entities:
+            AppBundle\Entity\ProductPicture:
+                image:
+                    directory: '%web_dir%/upload/product'
+                    alias: '/upload/product'
+            AppBundle\Entity\ProductFile:
+                file:
+                    directory: '%web_dir%/upload/product'
+                    alias: '/upload/product'
+            AppBundle\Entity\Teaser:
+                image:
+                    directory: '%web_dir%/upload/teaser'
+                    alias: '/upload/teaser'

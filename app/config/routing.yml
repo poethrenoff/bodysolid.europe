@@ -1,8 +1,8 @@
 app:
     resource: "@AppBundle/Resources/config/routing.yml"
 
-admin_upload:
-    resource: "@AdminUploadBundle/Resources/config/routing.yml"
+app_extra:
+    resource: "@AppExtraBundle/Resources/config/routing.yml"
 
 admin_area:
     resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"

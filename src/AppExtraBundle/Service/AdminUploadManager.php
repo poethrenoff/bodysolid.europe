@@ -1,6 +1,6 @@
 <?php
 
-namespace AdminUploadBundle\Service;
+namespace AppExtraBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -55,7 +55,7 @@ class AdminUploadManager
      */
     public function getParams()
     {
-        return $this->container->getParameter('admin_upload');
+        return $this->container->getParameter('upload');
     }
 
     /**

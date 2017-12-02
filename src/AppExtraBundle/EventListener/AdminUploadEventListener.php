@@ -1,12 +1,12 @@
 <?php
 
-namespace AdminUploadBundle\EventListener;
+namespace AppExtraBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Sonata\AdminBundle\Event\PersistenceEvent;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
-use AdminUploadBundle\Service\AdminUploadManager;
+use AppExtraBundle\Service\AdminUploadManager;
 
 class AdminUploadEventListener implements EventSubscriberInterface
 {

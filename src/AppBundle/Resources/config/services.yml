@@ -51,7 +51,7 @@ services:
             - [ addChild, ['@sonata.admin.product_file'] ]
             - [ addChild, ['@sonata.admin.product_video'] ]
             - [ addChild, ['@sonata.admin.product_property'] ]
-            - [ setTemplate, [edit, AdminUploadBundle::edit.html.twig]]
+            - [ setTemplate, [edit, AppExtraBundle::edit.html.twig]]
         public: true
 
     sonata.admin.product_picture:
@@ -111,7 +111,7 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: 'Тексты' }
         calls:
-            - [ setTemplate, [edit, AdminUploadBundle::edit.html.twig]]
+            - [ setTemplate, [edit, AppExtraBundle::edit.html.twig]]
         public: true
 
     sonata.admin.teaser:

@@ -1,6 +1,6 @@
 <?php
 
-namespace AdminUploadBundle\DependencyInjection;
+namespace AppExtraBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -12,7 +12,7 @@ use Symfony\Component\Config\FileLocator;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class AdminUploadExtension extends Extension
+class AppExtraExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -25,14 +25,14 @@ class AdminUploadExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        foreach ($config['entities'] as $class => $entityConfig) {
+        foreach ($config['upload']['entities'] as $class => $entityConfig) {
             foreach ($entityConfig as $field => $fieldConfig) {
-                $config['entities'][$class][$field]['directory'] = $fieldConfig['directory'] ?? $config['directory'];
-                $config['entities'][$class][$field]['alias'] = $fieldConfig['alias'] ?? $config['alias'];
-                $config['entities'][$class][$field]['fileField'] = $fieldConfig['fileField'] ?? ($field . 'File');
+                $config['upload']['entities'][$class][$field]['directory'] = $fieldConfig['directory'] ?? $config['directory'];
+                $config['upload']['entities'][$class][$field]['alias'] = $fieldConfig['alias'] ?? $config['alias'];
+                $config['upload']['entities'][$class][$field]['fileField'] = $fieldConfig['fileField'] ?? ($field . 'File');
             }
         }
-
-        $container->setParameter('admin_upload', $config);
+        $container->setParameter('upload', $config['upload']);
+        $container->setParameter('image', $config['image']);
     }
 }

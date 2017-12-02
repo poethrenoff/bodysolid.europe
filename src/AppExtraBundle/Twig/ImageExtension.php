@@ -1,8 +1,8 @@
 <?php
 
-namespace ImageBundle\Twig;
+namespace AppExtraBundle\Twig;
 
-use ImageBundle\Services\ImageHandling;
+use AppExtraBundle\Service\ImageManager;
 
 /**
  * ImageExtension
@@ -10,14 +10,14 @@ use ImageBundle\Services\ImageHandling;
 class ImageExtension extends \Twig_Extension
 {
     /**
-     * @var ImageHandling
+     * @var ImageManager
      */
     private $imageHandling;
 
     /**
-     * @param ImageHandling $imageHandling
+     * @param ImageManager $imageHandling
      */
-    public function __construct(ImageHandling $imageHandling)
+    public function __construct(ImageManager $imageHandling)
     {
         $this->imageHandling = $imageHandling;
     }

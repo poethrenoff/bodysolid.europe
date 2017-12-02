@@ -1,6 +1,6 @@
 <?php
 
-namespace ImageBundle\Entity;
+namespace AppExtraBundle\Entity;
 
 use Gregwar\Image\Image as BaseImage;
 
