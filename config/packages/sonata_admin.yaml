@@ -1,0 +1,44 @@
+# Sonata Admin Configuration
+sonata_admin:
+    title: 'Bodysolid Europe'
+    options:
+        confirm_exit: false
+
+    dashboard:
+        blocks:
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: [catalogue]
+            -
+                position: right
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: [purchase, content, system]
+
+        groups:
+            catalogue:
+                label: 'Каталог'
+                items:
+                    - sonata.admin.brand
+                    - sonata.admin.category
+                    - sonata.admin.product
+                    - sonata.admin.product_picture
+                    - sonata.admin.product_file
+                    - sonata.admin.product_video
+                    - sonata.admin.product_property
+            purchase:
+                label: 'Заказы'
+                items:
+                    - sonata.admin.purchase
+                    - sonata.admin.purchase_item
+            content:
+                label: 'Контент'
+                items:
+                    - sonata.admin.text
+                    - sonata.admin.teaser
+            system:
+                label: 'Система'
+                items:
+                    - sonata.admin.preference

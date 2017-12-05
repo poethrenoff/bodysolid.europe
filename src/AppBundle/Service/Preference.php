@@ -13,16 +13,18 @@ class Preference
     protected $preferences;
 
     /**
+     * @var EntityManagerInterface
+     */
+    protected $entityManager;
+
+    /**
      * Preference constructor
      *
      * @param EntityManagerInterface $entityManager
      */
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $preferences = $entityManager->getRepository(PreferenceEntity::class)->findAll();
-        foreach ($preferences as $preference) {
-            $this->preferences[$preference->getName()] = $preference->getValue();
-        }
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -35,6 +37,13 @@ class Preference
      */
     public function get(string $name, string $default = null)
     {
+        if (empty($this->preferences)) {
+            $preferences = $this->entityManager->getRepository(PreferenceEntity::class)->findAll();
+            foreach ($preferences as $preference) {
+                $this->preferences[$preference->getName()] = $preference->getValue();
+            }
+        }
+
         return $this->preferences[$name] ?? $default;
     }
 }

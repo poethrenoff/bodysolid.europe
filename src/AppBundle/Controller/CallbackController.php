@@ -6,7 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use AppBundle\Service\Preference;
 use AppBundle\Entity\Callback;
 use AppBundle\Form\CallbackType;
@@ -14,7 +14,7 @@ use AppBundle\Form\CallbackType;
 class CallbackController extends Controller
 {
     /**
-     * @var Session
+     * @var SessionInterface
      */
     protected $session;
 
@@ -31,13 +31,15 @@ class CallbackController extends Controller
     /**
      * CallbackController constructor
      *
+     * @param SessionInterface $session
      * @param Preference $preference
      * @param \Swift_Mailer $mailer
      */
-    public function __construct(Preference $preference,
+    public function __construct(SessionInterface $session,
+                                Preference $preference,
                                 \Swift_Mailer $mailer)
     {
-        $this->session = new Session();
+        $this->session = $session;
         $this->preference = $preference;
         $this->mailer = $mailer;
     }

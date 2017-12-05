@@ -6,7 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use AppBundle\Service\Cart;
 use AppBundle\Service\Preference;
@@ -23,7 +23,7 @@ class PurchaseController extends Controller
     protected $cart;
 
     /**
-     * @var Session
+     * @var SessionInterface
      */
     protected $session;
 
@@ -46,17 +46,19 @@ class PurchaseController extends Controller
      * PurchaseController constructor
      *
      * @param Cart $cart
+     * @param SessionInterface $session
      * @param Preference $preference
      * @param EntityManagerInterface $entityManager
      * @param \Swift_Mailer $mailer
      */
     public function __construct(Cart $cart,
+                                SessionInterface $session,
                                 Preference $preference,
                                 EntityManagerInterface $entityManager,
                                 \Swift_Mailer $mailer)
     {
         $this->cart = $cart;
-        $this->session = new Session();
+        $this->session = $session;
         $this->preference = $preference;
         $this->entityManager = $entityManager;
         $this->mailer = $mailer;

@@ -1,14 +1,11 @@
-# To get started with security, check out the documentation:
-# https://symfony.com/doc/current/security.html
 security:
-
-    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    # https://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory:
             memory:
                 users:
                     admin:
-                        password: '%admin_password%'
+                        password: '%env(resolve:ADMIN_PASSWORD)%'
                         roles: 'ROLE_ADMIN'
 
     encoders:
@@ -17,15 +14,19 @@ security:
             cost: 12
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
         main:
             anonymous: ~
+
+            # activate different ways to authenticate
+
             http_basic: ~
-            logout_on_user_change: ~
+            # https://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # https://symfony.com/doc/current/cookbook/security/form_login_setup.html
 
     access_control:
         # require ROLE_ADMIN for /admin*
