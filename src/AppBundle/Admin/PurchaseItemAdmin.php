@@ -27,14 +27,14 @@ class PurchaseItemAdmin extends AbstractAdmin
         $formMapper
             ->add('purchase', EntityType::class, [
                 'class' => Purchase::class,
-                'label' => 'Производитель',
+                'label' => 'Заказ',
             ])
             ->add('product', EntityType::class, [
                 'class' => Product::class,
-                'label' => 'Производитель',
+                'label' => 'Товар',
             ])
-            ->add('price', NumberType::class, ['label' => 'Email'])
-            ->add('quantity', IntegerType::class, ['label' => 'Телефон']);
+            ->add('price', NumberType::class, ['label' => 'Цена'])
+            ->add('quantity', IntegerType::class, ['label' => 'Количество']);
     }
 
     /**
