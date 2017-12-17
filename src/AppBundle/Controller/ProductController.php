@@ -27,7 +27,7 @@ class ProductController extends Controller
     public function menuAction(Request $request)
     {
         $categoryList = $this->getDoctrine()->getManager()
-            ->getRepository(Category::class)->findBy(['active' => true, 'category' => null]);
+            ->getRepository(Category::class)->findBy(['active' => true, 'category' => null], ['sort' => 'asc']);
 
         return $this->render('@App/Product/menu.html.twig', array(
             'categoryList' => $categoryList,

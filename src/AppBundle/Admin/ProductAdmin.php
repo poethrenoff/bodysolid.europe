@@ -58,7 +58,7 @@ class ProductAdmin extends AbstractAdmin
             ->add('brand', null, ['label' => 'Производитель'])
             ->add('category', null, ['label' => 'Категория'])
             ->add('title', null, ['label' => 'Название'])
-            ->add('status', null, ['label' => 'Статус'])
+            ->add('status', 'doctrine_orm_choice', ['label' => 'Статус'], ChoiceType::class, ['choices' => array_flip(Product::STATUSES)])
             ->add('best', null, ['label' => 'Лучший товар'])
             ->add('active', null, ['label' => 'Видимость']);
     }
@@ -73,8 +73,8 @@ class ProductAdmin extends AbstractAdmin
             ->add('category', null, ['label' => 'Категория'])
             ->add('brand', null, ['label' => 'Производитель'])
             ->addIdentifier('title', null, ['label' => 'Название'])
-            ->add('price', null, ['label' => 'Цена', 'editable' => true])
-            ->add('status', null, ['label' => 'Статус'])
+            ->add('price', 'integer', ['label' => 'Цена', 'editable' => true])
+            ->add('status', 'choice', ['label' => 'Статус', 'choices' => Product::STATUSES, 'editable' => true])
             ->add('active', null, ['label' => 'Видимость', 'editable' => true])
             ->add('_action', 'actions', [
                 'label' => 'Операции',
