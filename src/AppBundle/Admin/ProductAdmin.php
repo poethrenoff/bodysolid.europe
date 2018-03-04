@@ -43,6 +43,7 @@ class ProductAdmin extends AbstractAdmin
             ->add('brand', EntityType::class, ['class' => Brand::class, 'label' => 'Производитель'])
             ->add('title', TextType::class, ['label' => 'Название'])
             ->add('price', NumberType::class, ['label' => 'Цена'])
+            ->add('priceOld', NumberType::class, ['label' => 'Старая цена', 'required' => false])
             ->add('description', TextareaType::class, ['label' => 'Подробное описание', 'required' => false, 'attr' => ['class' => 'editor']])
             ->add('status', ChoiceType::class, ['label' => 'Статус', 'choices' => array_flip(Product::STATUSES)])
             ->add('best', CheckboxType::class, ['label' => 'Лучший товар', 'required' => false])
@@ -74,6 +75,7 @@ class ProductAdmin extends AbstractAdmin
             ->add('brand', null, ['label' => 'Производитель'])
             ->addIdentifier('title', null, ['label' => 'Название'])
             ->add('price', 'integer', ['label' => 'Цена', 'editable' => true])
+            ->add('priceOld', 'integer', ['label' => 'Старая цена', 'editable' => true])
             ->add('status', 'choice', ['label' => 'Статус', 'choices' => Product::STATUSES, 'editable' => true])
             ->add('active', null, ['label' => 'Видимость', 'editable' => true])
             ->add('_action', 'actions', [

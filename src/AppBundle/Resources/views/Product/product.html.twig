@@ -14,6 +14,9 @@
                         <div class="product-title">
                             <div class="product-price">
                                 {{ productItem.price|number_format(0, '.', ' ') }} р.
+{% if productItem.priceOld %}
+                                <span class="price-old">{{ productItem.priceOld|number_format(0, '.', ' ') }} р.</span>
+{% endif %}
                             </div>
                             <div class="product-cart{% if cart().in(productItem.id) %} selected{% endif %}">
                                 <a href="{{ path('cart_add', {id: productItem.id}) }}" onclick="return buyItem($(this))">

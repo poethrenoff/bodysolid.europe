@@ -513,6 +513,11 @@ h3 {
             color: #a32c14;
             text-align: left;
         }
+            .catalogue .product .product-title .product-price span.price-old {
+                margin-left: 10px;
+                color: #999999;
+                text-decoration: line-through;
+            }
         .catalogue .product .product-title .product-cart {
             display: table-cell;
             text-align: right;
@@ -591,6 +596,12 @@ h3 {
     text-align: center;
     margin-top: 10px;
 }
+    .card-price span.price-old {
+        margin-left: 10px;
+        color: #999999;
+        font-size: 12px;
+        text-decoration: line-through;
+    }
 .card-cart, .card-compare {
     text-align: right;
     width: 200px;

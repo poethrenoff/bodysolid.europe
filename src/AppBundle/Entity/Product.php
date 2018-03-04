@@ -79,6 +79,13 @@ class Product
     protected $price;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(type="decimal", scale=2)
+     */
+    protected $priceOld;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
@@ -248,6 +255,24 @@ class Product
     public function setPrice(?float $price): Product
     {
         $this->price = $price;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPriceOld(): ?float
+    {
+        return $this->priceOld;
+    }
+
+    /**
+     * @param float $priceOld
+     * @return Product
+     */
+    public function setPriceOld(?float $priceOld): Product
+    {
+        $this->priceOld = $priceOld;
         return $this;
     }
 
