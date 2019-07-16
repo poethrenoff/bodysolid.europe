@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  web:
+    build: ./docker/web
+    ports:
+      - 80:80
+    volumes:
+      - .:/var/www
+      - ./www:/var/www/html
+      - ./var/logs:/var/log/apache2
+
+  mysql:
+    build: ./docker/mysql
+    ports:
+      - 3306:3306
